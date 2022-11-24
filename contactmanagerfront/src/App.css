@@ -29,10 +29,25 @@
   transform: translate(-50%,-50%);
 }
 
+.data-wrapper{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color:palegreen;
+}
+.name{
+  width: 10%;
+}
+.email{
+  width: 20%;
+}
+.phonenumber{
+  width: 15%;
+}
 
-
-
-
+.designation{
+  width: 20%;
+}
 
 
 
