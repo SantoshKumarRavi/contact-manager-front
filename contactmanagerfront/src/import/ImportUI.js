@@ -6,6 +6,7 @@ import Delete from "../delete/Delete"
 import { AuthConsumer} from "../useauth/Useauth";
 import { useNavigate } from "react-router-dom";
 import {Navigate} from "react-router-dom";
+import Contacts from "../contactpage/Contacts";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid, regular, brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
@@ -43,11 +44,18 @@ console.log("data from context",value.accesstoken)
           headers: {
             'Content-Type': 'application/json' 
           },
-        }).then((x)=>x.json()).then((fetcheddata)=> setfilewithoutnpm(()=>{
+        }).then((x)=>x.json()).then((fetcheddata)=>{
+           setfilewithoutnpm(()=>{
         return {datas:fetcheddata.data} 
         }
         )
-        )
+        if(fetcheddata?.data?.length!=0){
+          setheader(()=>{
+          return ({heading:["Name","email","designmatuon"]})})
+        }
+       
+      }
+      )
       })()
   },[])
 
@@ -79,12 +87,18 @@ console.log("data from context",value.accesstoken)
 
 //frm 78 -importnat 
 
-  useEffect(()=>{ //temp closed due to highlighting
+  useEffect(async()=>{ //temp closed due to highlighting
     // console.log("dele tra ",deleteTracking)
     if(value.accesstoken==""){
         console.log("it is empty acces demied") 
         navigate("/unauthorized")
     }else{
+      // if(filewithoutnpm?.datas){
+        let dats=await filewithoutnpm.datas
+        console.log("file nom",dats)
+        // setheader(()=>{
+        //   return ({heading:["Name","email","designmatuon"]})})
+      // }
       console.log(value.accesstoken ,"granted")
     }
     // if(filewithoutnpm.datas){
@@ -96,7 +110,7 @@ console.log("data from context",value.accesstoken)
     //   console.log("useEffect else deletedArray",deletedArray)
 
     // }
-  },[filewithoutnpm])
+  },[])
 
   useEffect(()=>{ // important to clear the sucess //css
     if(successImport){
@@ -249,17 +263,9 @@ function logoutfunction(){
     <div className="App">
 
 {/* {value.accesstoken=="" && <Navigate replace to="/login" /> } */}
-      <button onClick={() => logoutfunction()}>Logout</button>
-      <Delete  setheader={setheader} setDeleteTracking={setDeleteTracking} deleteTracking={deleteTracking} filewithoutnpm={filewithoutnpm} setfilewithoutnpm={setfilewithoutnpm}/> 
       {showImportUI && (
         <style>{"body {background-color:rgba(0, 0, 0, 0.5)}"}</style>
       )}
-      <Button
-        showUI={showImportUI}
-        showref={showUIref_btn}
-        functionality={updateshowImportUI}
-        value={"import"}
-      />
       <div className="import">
         {showImportUI && (
           <div ref={showUIref_content}>
@@ -280,8 +286,6 @@ function logoutfunction(){
                 </div>
               </div>
               </>
-
-
               }
               {!successImport &&(
                 <>
@@ -311,34 +315,15 @@ function logoutfunction(){
                  onDragOver={btn_dragOverHandler} className="import-btn-cancel">Cancel</button>
                 </>
               )
-
-
               }
-             
             </div>
           </div>
         )}
       </div>
       {
-        <div className="data-wrapper">
-         {filewithoutnpm?.datas?.length!=0 && header?.heading&& <input name="Deleteall"  onChange={(e)=>changeCheckbox(e)} type={"checkbox"} />}
-          {
-           filewithoutnpm?.datas?.length!=0 &&header?.heading?.map((ele,i)=><p key={i} className={`${ele}`} >{ele}</p>)
-          }
-          </div>
+          <Contacts logoutfunction={logoutfunction}  showImportUI={showImportUI} updateshowImportUI={updateshowImportUI} showUIref_btn={showUIref_btn} setheader={setheader} setDeleteTracking={setDeleteTracking} deleteTracking={deleteTracking} setfilewithoutnpm={setfilewithoutnpm} filewithoutnpm={filewithoutnpm} header={header} changeCheckbox={changeCheckbox}/>
       }
-      { filewithoutnpm?.datas?.map((x, i) => {
-      // deletedArray?.push({id:x._id,checked:false})
-      // setDeleteTracking((pre)=>[...pre,{id:x._id,checked:false}]) //here not working ;;err: too many renders
-      return(<div className="data-wrapper" key={i}>
-      <input data-index={String(i)} onChange={(e)=>changeCheckbox(e)} id={x._id} type={"checkbox"} checked={deleteTracking[i]?.checked} />
-      <p className="name">{x.name}</p> 
-      <p className="email" >{x.email}</p>
-      <p className="phonenumber">{x.phonenumber}</p>
-      <p className="designation">{x.designation}</p>
-      </div>)})}
-      {/* <p>{console.log("deleted aray",deletedArray)}</p> */}
-    </div>
+      </div>
   );
 }
 
