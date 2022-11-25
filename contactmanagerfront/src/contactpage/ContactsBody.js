@@ -6,10 +6,13 @@ const ContactsBody = ({
   changeCheckbox,
   deleteTracking,
 }) => {
+
+  console.log("data inside bpody",filewithoutnpm.datas)
   return (
     <>
       {header?.heading &&
         filewithoutnpm?.datas?.map((x, i) => {
+  
           // deletedArray?.push({id:x._id,checked:false})
           // setDeleteTracking((pre)=>[...pre,{id:x._id,checked:false}]) //here not working ;;err: too many renders
           return (
@@ -21,10 +24,14 @@ const ContactsBody = ({
                 type={"checkbox"}
                 checked={deleteTracking[i]?.checked}
               />
-              <p className="name">{x.name}</p>
-              <p className="email">{x.email}</p>
-              <p className="phonenumber">{x.phonenumber}</p>
-              <p className="designation">{x.designation}</p>
+              <p className="Name">{x.Name}</p>
+              <p className="Designation">{x.Designation}</p>
+              <p className="Company">{x.Company}</p>
+              <p className="Industry">{x.Industry}</p>
+              <p className="Email">{x.Email}</p>
+              <p className="Phonenumber">{x.Phonenumber}</p>
+              <p className="Country">{x.Country}</p>
+              
             </div>
           );
         })}

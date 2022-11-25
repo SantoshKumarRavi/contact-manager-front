@@ -5,7 +5,7 @@ import AuthProvider from "../useauth/Useauth"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid, regular, brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
-function Appdelete({deleteTracking,setheader,setDeleteTracking,setfilewithoutnpm,filewithoutnpm}) {
+function Appdelete({classname,deleteTracking,setheader,setDeleteTracking,setfilewithoutnpm,filewithoutnpm}) {
   const [showDeleteUI, setshowDeleteUI] = useState(false);
   const showDeleteref_btn = useRef(null);
   const showDeleteref_content = useRef(null);
@@ -114,11 +114,12 @@ function Appdelete({deleteTracking,setheader,setDeleteTracking,setfilewithoutnpm
   }
  
   return (
-    <div className="App">
+    <>
       {showDeleteUI && (
         <style>{"body {background-color:rgba(0, 0, 0, 0.5)}"}</style>
       )}
       <Button
+        classname={classname}
         showUI={showDeleteUI}
         showref={showDeleteref_btn}
         functionality={updateshowDeleteUI}
@@ -183,7 +184,7 @@ function Appdelete({deleteTracking,setheader,setDeleteTracking,setfilewithoutnpm
           color :{x.color} ; value {x.value}
         </div>
       ))} */}
-    </div>
+    </>
   );
 }
 

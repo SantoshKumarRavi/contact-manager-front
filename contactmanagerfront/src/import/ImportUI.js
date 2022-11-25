@@ -276,6 +276,8 @@ function logoutfunction(){
                 <div className="circle-tick-wrapper" >
                   <div className="circle-tick" >
                   <FontAwesomeIcon className="fontaw-tick" icon={solid('check')} />
+                  {/* <FontAwesomeIcon icon={regular('objects-column')} /> */}
+                  {/* <FontAwesomeIcon icon="fa-regular fa-objects-column" /> */}
                   </div>
                 </div>
                 <div className="sucess-wrapper-text">
