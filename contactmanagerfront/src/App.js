@@ -18,18 +18,18 @@ function App() {
   // const [accesstoken, setaccesstoken] =useState("gojoofgv.vjgjv.dvjgd");
   return (
     <Router >
-      <Routes >
+       <Routes >
              <Route
                 exact
                 path="/"
-                element={<Navigate replace to="/signup" />}
+                element={<Navigate replace to="/contact" />}
               />
         <Route path="/signup" element={<Signup/>} />
         <Route path="/login" element={
           <AuthProvider> <Login/></AuthProvider>
        } />
         <Route
-          path="/contact"
+          path="/contact" // /contact
           element={
             <AuthProvider>
               <ImportUI />

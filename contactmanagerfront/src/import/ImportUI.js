@@ -7,7 +7,10 @@ import { AuthConsumer} from "../useauth/Useauth";
 import { useNavigate } from "react-router-dom";
 import {Navigate} from "react-router-dom";
 
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { solid, regular, brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
+// import 'font-awesome/css/font-awesome.min.css'; //import in react app
+// import {FontAwesomeIcon} from "@fortawesome/free-solid-svg-icons"
 // import {AuthproviderWrapper} from "../App"
 // import UseAuth from "../useauth/Useauth"
 /*
@@ -33,7 +36,7 @@ const value=AuthConsumer()
 console.log("data from context",value.accesstoken)
 // console.log("history",history.action)
 
-  useEffect(()=>{
+  useEffect(()=>{ // as of not requird for im not connecting db ..now css
     (async function getData() {
       await fetch("http://localhost:8081/contacts", {
           method: 'GET', 
@@ -71,8 +74,12 @@ console.log("data from context",value.accesstoken)
   // const [deletedArray,setDeleteArray]=useState([])
   const [deleteTracking,setDeleteTracking]=useState([])
   const[header,setheader]=useState({})
+  const[successImport,setsuccessImport]=useState(false) //false
   // const[checked,setChecked]=useState(false)
-  useEffect(()=>{
+
+//frm 78 -importnat 
+
+  useEffect(()=>{ //temp closed due to highlighting
     // console.log("dele tra ",deleteTracking)
     if(value.accesstoken==""){
         console.log("it is empty acces demied") 
@@ -90,7 +97,19 @@ console.log("data from context",value.accesstoken)
 
     // }
   },[filewithoutnpm])
- 
+
+  useEffect(()=>{ // important to clear the sucess //css
+    if(successImport){
+      setTimeout(()=>{
+        setsuccessImport(false)
+        setshowImportUI(false)
+      },1000)
+
+    }
+
+  },[successImport])
+
+
   // const data= AuthConsumer();
     // const aurth= UseAuth();
   // console.log("accesstoken",data)
@@ -157,7 +176,7 @@ console.log("data from context",value.accesstoken)
       console.log("datas ", columns); //  heading as array of strings // may be used for customize column changing.. here we fixed the schema
       console.log("parsed data", parsedData); // data as array of objects
       if(parsedData){
-        setshowImportUI(false) //{id:"1",checked:true},{id:"2",checked:true},{id:"3",checked:false}
+        setsuccessImport(true) //{id:"1",checked:true},{id:"2",checked:true},{id:"3",checked:false}
       }
     };
     reader.readAsText(e.dataTransfer.files[0]);
@@ -219,7 +238,6 @@ function logoutfunction(){
   value.setValue("")
   console.log("after empty from context",value.accesstoken)
   navigate("/login")
-
 }
 // useEffect(()=>{
 // if(value.accesstoken==""){
@@ -246,22 +264,57 @@ function logoutfunction(){
         {showImportUI && (
           <div ref={showUIref_content}>
             <div className="drag-wrapper">
-              <input
-                type="file"
-                accept=".csv,.xlsx,.xls"
-                className="import-input-box"
-                onClick={onclickHandler}
-                // onChange={handleChange}//only drag 
-                onDrop={(e) => drop(e)}
-                onDragOver={dragOverHandler}
-              />
-              <div className="over-the-input-files">
-                <h1>Import files</h1>
-                <p>drag here and click to upload </p>
+              {successImport &&
+              <>
+              <div className="success-wrapper" >
+                <div className="circle-tick-wrapper" >
+                  <div className="circle-tick" >
+                  <FontAwesomeIcon className="fontaw-tick" icon={solid('check')} />
+                  </div>
+                </div>
+                <div className="sucess-wrapper-text">
+                    <p className="success-text">Import Complete</p>
+                </div>
+                <div className="response-wrapper" >
+                  <p className="res-text">CSV File is Uploaded</p>
+                </div>
               </div>
-              <button  onDrop={(e) => btn_drop(e)}
-              onClick={cancel_import}
-                onDragOver={btn_dragOverHandler} className="import-btn-cancel">Cancel</button>
+              </>
+
+
+              }
+              {!successImport &&(
+                <>
+                 <input
+                 type="file"
+                 accept=".csv,.xlsx,.xls"
+                 className="import-input-box"
+                 onClick={onclickHandler}
+                 // onChange={handleChange}//only drag 
+                 onDrop={(e) => drop(e)}
+                 onDragOver={dragOverHandler}
+               />
+               <div className="circle-logo-drag" >
+               <div className="import-logo">
+               {/* <img  src={require("../icons/file.png")}/> */}
+               <img src="https://img.icons8.com/glyph-neue/64/null/new-by-copy.png"/>
+               </div>
+               </div>
+               <div className="over-the-input-files" >
+                 <p className="import-text" >Import File</p>
+               </div>
+               <div  className="over-the-input-files-content" >
+                 <p className="import-content"  >Drag & Drop a CSV File to Upload</p>
+               </div>
+               <button  onDrop={(e) => btn_drop(e)}
+               onClick={cancel_import}
+                 onDragOver={btn_dragOverHandler} className="import-btn-cancel">Cancel</button>
+                </>
+              )
+
+
+              }
+             
             </div>
           </div>
         )}

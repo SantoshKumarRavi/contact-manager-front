@@ -3,10 +3,13 @@ import "../App.css";
 import Button from "../components/Button";
 import AuthProvider from "../useauth/Useauth"
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { solid, regular, brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
 function Appdelete({deleteTracking,setheader,setDeleteTracking,setfilewithoutnpm,filewithoutnpm}) {
   const [showDeleteUI, setshowDeleteUI] = useState(false);
   const showDeleteref_btn = useRef(null);
   const showDeleteref_content = useRef(null);
+  const[contactDeleted,setContactDeleted]=useState(false)
   function updateshowDeleteUI() {
     setshowDeleteUI((prev) => !prev);
   }
@@ -38,6 +41,15 @@ function Appdelete({deleteTracking,setheader,setDeleteTracking,setfilewithoutnpm
       document.removeEventListener("click", handleClickOutside, false);
     };
   }, []); 
+  useEffect(()=>{ // imp for claer
+    if(contactDeleted){
+      setTimeout(()=>{
+        setshowDeleteUI(false)
+        setContactDeleted(false)
+      },1000)
+    }
+
+  },[contactDeleted])
 
   function deleteFiles(){
     console.log("from del , del trackig",deleteTracking)
@@ -82,7 +94,7 @@ function Appdelete({deleteTracking,setheader,setDeleteTracking,setfilewithoutnpm
           console.log("idhashobj",hashmap)
           console.log("removd ",removed)
           console.log("updatedAfterDelete ",updatedAfterDelete)
-          setshowDeleteUI(false)
+          // setshowDeleteUI(false)
           setfilewithoutnpm({datas:updatedAfterDelete})
 
           let updatedDeletedtrackingIds=[...deleteTracking]
@@ -93,8 +105,12 @@ function Appdelete({deleteTracking,setheader,setDeleteTracking,setfilewithoutnpm
           })
           console.log("updatedDeletedtrackingIds ",updatedDeletedtrackingIds)
           setDeleteTracking(()=>[...updatedDeletedtrackingIds])
+          setContactDeleted(true)
         } )
   })()
+  }
+  function cancelDelete(){
+    setshowDeleteUI(false)
   }
  
   return (
@@ -111,9 +127,53 @@ function Appdelete({deleteTracking,setheader,setDeleteTracking,setfilewithoutnpm
       <div className="import">
         {showDeleteUI && (
           <div ref={showDeleteref_content}>
-            <div className="drag-wrapper">
-                <p>Confirm Delete</p>
-                <button onClick={deleteFiles} >OK</button>
+            <div className="drag-wrapper-delete">
+              { !contactDeleted && (
+                  <>
+                   <div className="del-logo-wrapper">
+                <div className="del-logo">
+                  <FontAwesomeIcon
+                    className="fontaw-tick"
+                    icon={solid("trash-can")}
+                  />
+                </div>
+              </div>
+              <div className="delete-text-wrapper">
+                <p className="del-text">Delete Contacts</p>
+              </div>
+              <div className="delete-confirm-wrapper">
+                <p className="del-confirm-text">
+                  Sure you want delete this Contacts ?
+                </p>
+              </div>
+              <div className="btn-wrapper">
+                <button className="cancel-btn" onClick={cancelDelete}>Cancel</button>
+                <button className="delete-ok-btn" onClick={deleteFiles}>Ok</button>
+              </div>
+                  
+                  </>
+
+
+              )
+
+              }
+              {contactDeleted &&(
+                  <>
+                      <div className="del-logo-wrapper del-tick-wrapper">
+                <div className="del-logo">
+                  <FontAwesomeIcon
+                    className="fontaw-tick"
+                    icon={solid("check")}
+                  />
+                </div>
+              </div>
+              <div className="deleted-message">
+                <p>Deleted Contacts</p>
+              </div>
+                  </>
+                )
+              }
+             
             </div>
           </div>
         )}
