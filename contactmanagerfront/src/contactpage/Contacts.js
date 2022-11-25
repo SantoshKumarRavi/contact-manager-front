@@ -72,7 +72,9 @@ const Contacts = ({
               </div>
               <div className="usersdetails-container">
                 <div className="logo-data-wrapper">
-                  <div className="user-logo-container"></div>
+                  <div className="user-logo-container">
+                    <img src={"user.png"}/>
+                  </div>
                   <div className="data-container">
                     <div className="username-text">Ram</div>
                     <div className="userrole-text">Engineer</div>

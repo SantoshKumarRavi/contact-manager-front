@@ -438,7 +438,14 @@ color: #1F2633;
 }
 
 .user-logo-container{
+  border-radius: 50px;
   width: 30%;
+}
+.user-logo-container > img{
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+
 }
 
 .data-container{
