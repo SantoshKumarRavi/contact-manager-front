@@ -36,14 +36,17 @@ const Contacts = ({
             <div className="aside-contact-header">
               <div className="child-aside">
                 <img alt="dash-icon" className="img-dash" src={"dash.png"} />
+    
                 <p className="dash-text">Dashboard</p>
               </div>
-              <div className="child-aside">
+              <div className="child-aside ">
                 <FontAwesomeIcon
                   className="fontaw-contacts-icon"
                   icon={regular("id-badge")}
                 />
-                <p className="dash-text">Total contacts</p>
+                <div  className="dash-text-border">
+                <div className="dash-text dash-text-total ">Total contacts</div>                
+                </div>
               </div>
             </div>
           </div>

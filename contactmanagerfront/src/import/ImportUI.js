@@ -51,7 +51,7 @@ console.log("data from context",value.accesstoken)
         )
         if(fetcheddata?.data?.length!=0){
           setheader(()=>{
-          return ({heading:["Name","email","designmatuon"]})})
+          return ({heading:["Name","Designation","Company","Industry","Email","Phonenumber","Country"]})})
         }
        
       }

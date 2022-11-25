@@ -1,22 +1,70 @@
 import React from "react";
 import "../App.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  solid,
+  regular,
+  brands,
+  icon,
+  thin,
+} from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
 
 const ContactsBodyHead = ({ filewithoutnpm, header, changeCheckbox }) => {
   return (
-    <div className="data-wrapper">
+    <div className="data-wrapper body-header">
       {filewithoutnpm?.datas?.length != 0 && header?.heading && (
-        <input
-          name="Deleteall"
-          onChange={(e) => changeCheckbox(e)}
-          type={"checkbox"}
-        />
+        <div className="input-header">
+          <input
+            name="Deleteall"
+            onChange={(e) => changeCheckbox(e)}
+            type={"checkbox"}
+          />
+        </div>
       )}
-      {filewithoutnpm?.datas?.length != 0 &&
-        header?.heading?.map((ele, i) => (
-          <p key={i} className={`${ele}`}>
-            {ele}
-          </p>
-        ))}
+      <div className="content-overall-wrapper">
+        {filewithoutnpm?.datas?.length != 0 &&
+          header?.heading?.map((ele, i) => {
+            if (ele != "Designation" && ele != "Company" && ele != "Industry") {
+              return (
+                <div key={i} className={`${ele} common-header-styles`}>
+                  {ele}
+                </div>
+              );
+            } else {
+              return (
+                <div
+                  key={i}
+                  className={`${ele} common-header-styles logo-text-wrapper`}
+                >
+                  <>{ele}</>
+                  <div  className={(ele=="Designation")||(ele=="Company")?'up-down-logo-container desig-company':"up-down-logo-container"}>
+                    <div className="up-down font-up">
+                      <div  className="fontaws-ups">
+                      <FontAwesomeIcon
+                       icon={solid("caret-up")}
+                     />
+                      </div>
+                   
+                    </div>
+                    {
+                      <div className="up-down font-up font-down">
+                        <FontAwesomeIcon
+                          className="ontaws-ups"
+                          icon={solid("caret-down")}
+                        />
+                      </div>
+                    }
+                  </div>
+                </div>
+              );
+            }
+          })}
+      </div>
+      <div className="action-wrapper">
+        {filewithoutnpm?.datas?.length != 0 && header?.heading && (
+          <div className="Action">Action</div>
+        )}
+      </div>
     </div>
   );
 };
