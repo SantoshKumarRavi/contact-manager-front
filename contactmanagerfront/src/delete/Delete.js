@@ -5,8 +5,7 @@ import AuthProvider from "../useauth/Useauth"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid, regular, brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
-function Appdelete({classname,deleteTracking,setheader,setDeleteTracking,setfilewithoutnpm,filewithoutnpm}) {
-  const [showDeleteUI, setshowDeleteUI] = useState(false);
+function Appdelete({showDeleteUI,setshowDeleteUI,classname,deleteTracking,setheader,setDeleteTracking,setfilewithoutnpm,filewithoutnpm}) {
   const showDeleteref_btn = useRef(null);
   const showDeleteref_content = useRef(null);
   const[contactDeleted,setContactDeleted]=useState(false)

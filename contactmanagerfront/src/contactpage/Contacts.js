@@ -1,8 +1,9 @@
-import React from "react";
+import React ,{useState} from "react";
 import ContactsBodyHead from "./ContactsBodyHead";
 import ContactsBody from "./ContactsBody";
 import Delete from "../delete/Delete";
 import Button from "../components/Button";
+import Searchbar from "./Searchbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   solid,
@@ -25,6 +26,10 @@ const Contacts = ({
   setDeleteTracking,
   logoutfunction,
 }) => {
+  const [searchedEmails,setSearchedEmails]=useState({})
+  const [showDeleteUI, setshowDeleteUI] = useState(false);
+
+
   return (
     <>
       <div className="Contact-page-wrapper">
@@ -51,11 +56,11 @@ const Contacts = ({
             </div>
           </div>
           <div className="aside-logout-container">
-            <div className="logo-content-wrapper" >
+            <div className={"logo-content-wrapper"} >
             <FontAwesomeIcon
                     icon={solid("right-from-bracket")}
                   />
-            <button onClick={() => logoutfunction()}>
+            <button className={showImportUI?"btn-before-glossy glossy-background":"btn-before-glossy"}  onClick={() => logoutfunction()}>
                 Logout
                 </button>
             </div>
@@ -68,7 +73,9 @@ const Contacts = ({
             </div>
             <div className="search-wrapper">
               <div className="search-bar-wrapper">
-                <div className="search-bar"></div>
+                <div className="search-bar">
+                    <Searchbar showImportUI={showImportUI} setSearchedEmails={setSearchedEmails} searchedEmails={searchedEmails} filewithoutnpm={filewithoutnpm}/>
+                </div>
               </div>
               <div className="usersdetails-container">
                 <div className="logo-data-wrapper">
@@ -91,7 +98,10 @@ const Contacts = ({
                     <FontAwesomeIcon
                   icon={regular ("calendar-days")}
                 />
-                  <Button classname={`common-styles-btn dates-filter`} value={"Select Date"} />
+             
+                  {/* <Button classname={`common-styles-btn dates-filter`} value={"Select Date"} /> */}
+                <Button  classname={!showImportUI?'common-styles-btn dates-filter':"btn-before-glossy glossy-background"}
+                 value={"Select Date"} />
                   <FontAwesomeIcon
                   icon={solid ("chevron-down")}
                 />
@@ -101,7 +111,8 @@ const Contacts = ({
                   <FontAwesomeIcon
                   icon={solid ("arrow-down-wide-short")}
                 />
-                  <Button  classname={`common-styles-btn dates-filter`} value={"Filters"} />
+               
+                  <Button   classname={!showImportUI?'common-styles-btn dates-filter':"btn-before-glossy glossy-background"} value={"Filters"} />
                   <FontAwesomeIcon
                   icon={solid ("chevron-down")}
                 />
@@ -113,8 +124,11 @@ const Contacts = ({
                     className="fontaw-tick"
                     icon={solid("trash-can")}
                   />
+                
                     <Delete
-                      classname={`common-styles-btn`}
+                    showDeleteUI={showDeleteUI}
+                    setshowDeleteUI={setshowDeleteUI}
+                       classname={!showImportUI?'common-styles-btn':"btn-before-glossy glossy-background"}
                       setheader={setheader}
                       setDeleteTracking={setDeleteTracking}
                       deleteTracking={deleteTracking}
@@ -131,7 +145,10 @@ const Contacts = ({
                     icon={solid("arrow-down")}
                   />
                     <Button
-                      classname={`common-styles-btn`}
+                classname={!showImportUI?'common-styles-btn import-btn':"btn-before-glossy glossy-background"}
+                    //  classname={'common-styles-btn import-btn'}
+                      // classname={`common-styles-btn`}
+                      // inlinestyle={"custom-import-style"}
                       showUI={showImportUI}
                       showref={showUIref_btn}
                       functionality={updateshowImportUI}
@@ -144,17 +161,21 @@ const Contacts = ({
                   <FontAwesomeIcon
                     icon={solid("arrow-up-from-bracket")}
                   />
-                    <Button classname={`common-styles-btn`} value={"Export"} />
+                
+                    <Button classname={!showImportUI?'common-styles-btn':"btn-before-glossy glossy-background"} value={"Export"} />
                   </div>
                 </div>
               </div>
               <div className="contacts-wrapper">
                 <ContactsBodyHead
+                 showImportUI={showImportUI}
                   changeCheckbox={changeCheckbox}
                   filewithoutnpm={filewithoutnpm}
                   header={header}
                 />
-                <ContactsBody
+                <ContactsBody 
+                  showImportUI={showImportUI}
+                  searchedEmails={searchedEmails}
                   deleteTracking={deleteTracking}
                   changeCheckbox={changeCheckbox}
                   filewithoutnpm={filewithoutnpm}

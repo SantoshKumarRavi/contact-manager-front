@@ -263,9 +263,7 @@ function logoutfunction(){
     <div className="App">
 
 {/* {value.accesstoken=="" && <Navigate replace to="/login" /> } */}
-      {showImportUI && (
-        <style>{"body {background-color:rgba(0, 0, 0, 0.5)}"}</style>
-      )}
+     
       <div className="import">
         {showImportUI && (
           <div ref={showUIref_content}>
@@ -322,6 +320,9 @@ function logoutfunction(){
           </div>
         )}
       </div>
+      {showImportUI && (
+        <style>{"body {background-color:rgba(0, 0, 0, 0.5)}"}</style>
+      )}
       {
           <Contacts logoutfunction={logoutfunction}  showImportUI={showImportUI} updateshowImportUI={updateshowImportUI} showUIref_btn={showUIref_btn} setheader={setheader} setDeleteTracking={setDeleteTracking} deleteTracking={deleteTracking} setfilewithoutnpm={setfilewithoutnpm} filewithoutnpm={filewithoutnpm} header={header} changeCheckbox={changeCheckbox}/>
       }

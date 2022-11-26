@@ -419,6 +419,7 @@ color: #1F2633;
   display: flex;
   justify-content: center;
   align-items: center;
+  /* background-color: yellow; */
 }
 .usersdetails-container{
   width: 40%;
@@ -427,8 +428,14 @@ color: #1F2633;
   align-items: center;
 }
 .search-bar{
-  width: 70%;
+  width: 90%;
+  /* background-color: violet; */
   height: 50%;
+}
+.input-search{
+  width: 100%;
+  height: 100%;
+  outline: none;
 }
 .logo-data-wrapper{
   width: 70%;
@@ -436,7 +443,18 @@ color: #1F2633;
   height: 80%;
   display: flex;
 }
-
+.input-search-wrapper{
+  position: relative;
+}
+.fontaw-mag-glass{
+  position: absolute;
+  top: 5px;
+  left: 10px;
+}
+.input-search-content{
+  box-sizing: border-box;
+  padding-left: 30px;
+}
 .user-logo-container{
   border-radius: 50px;
   width: 30%;
@@ -513,6 +531,7 @@ color: #1F2633;
   width: 35%;
 }
 .common-styles-btn{
+
   width: 100%;
   height: 100%;
 }
@@ -559,7 +578,7 @@ align-items: center;
 }
 
 .remove-border{
-  border-right: 1px solid burlywood;;
+  border-right: 1px solid white;;
 }
 .empty-state{
   padding: 0%;
@@ -659,12 +678,35 @@ border-right: 3px solid black;
   width: 100%;
   height: 80%;
 }
+.email-searched-content{
+  /* background-color: tomato; */
+  height: 30px;
+  z-index: 10;
+  text-align: left;
+  padding-left: 30px;
+}
+.search-email-wrapper{
+  display: flex;
+  flex-direction: column;
+}
+.email-wrapper{
+  position: relative;
+}
+.btn-before-glossy{
+  background-color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  padding: 0%;
+  margin: 0%;
+}
 
+.glossy-background {
+  background-color: rgba(255, 255, 255, 0);
+  border: 1px solid rgba(255, 255, 255, 0);
 
-
-
-
-
+}
+.checkbox-background{
+  opacity: 0.1;  
+}
 
 
 

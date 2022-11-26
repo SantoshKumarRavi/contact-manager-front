@@ -1,7 +1,7 @@
 import { useState } from "react";
 import React from "react";
 
-import "./App.css";
+// import "./App.css";
 // import Button from './components/Button';
 // import {useDropzone} from 'react-dropzone';
 import { Link, BrowserRouter as Router, Routes, Route ,Navigate} from "react-router-dom";
