@@ -1,4 +1,5 @@
 import React from "react";
+import ReactTooltip from 'react-tooltip';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   solid,
@@ -44,8 +45,10 @@ const ContactsBody = ({
               <div className="Designation  common-header-styles remove-border glossy-background">{x.Designation}</div>
               <div className="Company  common-header-styles remove-border glossy-background">{x.Company}</div>
               <div className="Industry  common-header-styles remove-border glossy-background">{x.Industry}</div>
-              <div className="Email  common-header-styles remove-border glossy-background">{x.Email}</div>
-              <div className="Phonenumber  common-header-styles remove-border glossy-background">{x.Phonenumber}</div>
+              <div  data-for='tool' data-tip={x.Email}
+               className="Email  common-header-styles remove-border glossy-background tip">{x.Email}</div>
+              <ReactTooltip place='bottom' id='tool'/>
+              <div className="Phonenumber  common-header-styles remove-border glossy-background tip">{x.Phonenumber}</div>
               <div className="Country  common-header-styles remove-border glossy-background">{x.Country}</div>
               </div>
               <div className="action-wrapper">
