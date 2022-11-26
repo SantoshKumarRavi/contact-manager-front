@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import App2 from './App2';
-import ImportUI from "../src/import/ImportUI";
-import Appdelete from './Appdelete';
-import Delete from "../src/delete/Delete"
+// import App2 from './App2';
+// import ImportUI from "../src/import/ImportUI";
+// import Appdelete from './Appdelete';
+// import Delete from "../src/delete/Delete"
 
 
 
