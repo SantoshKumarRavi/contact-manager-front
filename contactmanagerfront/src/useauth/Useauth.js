@@ -4,9 +4,12 @@ const AuthContext =React.createContext();
 
 export function AuthProvider({ children }){
   const [accesstoken, setaccesstoken] =useState("");
+  const[username,setusername]=useState("")
 const value={
     accesstoken:accesstoken,
-    setValue: (value) => setaccesstoken(()=>value)
+    setValue: (value) => setaccesstoken(()=>value),
+    username:username,
+    setName:(val)=>setusername(()=>val)
   }
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

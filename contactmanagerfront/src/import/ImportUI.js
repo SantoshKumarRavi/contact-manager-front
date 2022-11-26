@@ -27,6 +27,8 @@ function ImportUI() {
 
 
   const [showImportUI, setshowImportUI] = useState(false);
+  const [showDeleteUI, setshowDeleteUI] = useState(false);
+
   const showUIref_btn = useRef(null);
   const showUIref_content = useRef(null);
   function updateshowImportUI() {
@@ -34,6 +36,8 @@ function ImportUI() {
   }
   const [filewithoutnpm, setfilewithoutnpm] = useState({});
 const value=AuthConsumer()
+// username:username,
+// setName:(val)=>setUsername(()=>val)
 console.log("data from context",value.accesstoken)
 // console.log("history",history.action)
 
@@ -323,8 +327,9 @@ function logoutfunction(){
       {showImportUI && (
         <style>{"body {background-color:rgba(0, 0, 0, 0.5)}"}</style>
       )}
-      {
-          <Contacts logoutfunction={logoutfunction}  showImportUI={showImportUI} updateshowImportUI={updateshowImportUI} showUIref_btn={showUIref_btn} setheader={setheader} setDeleteTracking={setDeleteTracking} deleteTracking={deleteTracking} setfilewithoutnpm={setfilewithoutnpm} filewithoutnpm={filewithoutnpm} header={header} changeCheckbox={changeCheckbox}/>
+      {  
+      // const [showDeleteUI, setshowDeleteUI] = useState(false);
+          <Contacts showDeleteUI={showDeleteUI} setshowDeleteUI={setshowDeleteUI} logoutfunction={logoutfunction}  showImportUI={showImportUI} updateshowImportUI={updateshowImportUI} showUIref_btn={showUIref_btn} setheader={setheader} setDeleteTracking={setDeleteTracking} deleteTracking={deleteTracking} setfilewithoutnpm={setfilewithoutnpm} filewithoutnpm={filewithoutnpm} header={header} changeCheckbox={changeCheckbox}/>
       }
       </div>
   );

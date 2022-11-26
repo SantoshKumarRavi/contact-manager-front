@@ -13,8 +13,14 @@ import {
   thin,
 } from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
 import "../App.css";
+import { AuthConsumer } from "../useauth/Useauth";
+// username:username,
+// setName:(val)=>setUsername(()=>val)
+
 const Contacts = ({
   showImportUI,
+  showDeleteUI,
+  setshowDeleteUI,
   updateshowImportUI,
   showUIref_btn,
   filewithoutnpm,
@@ -27,9 +33,12 @@ const Contacts = ({
   logoutfunction,
 }) => {
   const [searchedEmails,setSearchedEmails]=useState({})
-  const [showDeleteUI, setshowDeleteUI] = useState(false);
-
-
+  const value=AuthConsumer()
+  // console.log
+let user=value?.username?.split("@")[0].split("")
+  let firstletter=user[0]?.toUpperCase()
+  let remaining=user?.slice(1).join("")
+  user=firstletter+remaining
   return (
     <>
       <div className="Contact-page-wrapper">
@@ -60,7 +69,7 @@ const Contacts = ({
             <FontAwesomeIcon
                     icon={solid("right-from-bracket")}
                   />
-            <button className={showImportUI?"btn-before-glossy glossy-background":"btn-before-glossy"}  onClick={() => logoutfunction()}>
+            <button className={showImportUI||showDeleteUI?"btn-before-glossy glossy-background":"btn-before-glossy"}  onClick={() => logoutfunction()}>
                 Logout
                 </button>
             </div>
@@ -74,16 +83,19 @@ const Contacts = ({
             <div className="search-wrapper">
               <div className="search-bar-wrapper">
                 <div className="search-bar">
-                    <Searchbar showImportUI={showImportUI} setSearchedEmails={setSearchedEmails} searchedEmails={searchedEmails} filewithoutnpm={filewithoutnpm}/>
+                    <Searchbar showDeleteUI={showDeleteUI} showImportUI={showImportUI} setSearchedEmails={setSearchedEmails} searchedEmails={searchedEmails} filewithoutnpm={filewithoutnpm}/>
                 </div>
               </div>
               <div className="usersdetails-container">
                 <div className="logo-data-wrapper">
                   <div className="user-logo-container">
-                    <img src={"user.png"}/>
+                    <img
+                    className={(showImportUI || showDeleteUI)?'glossy-image':''}
+                    // className=""
+                    src={"user.png"}/>
                   </div>
                   <div className="data-container">
-                    <div className="username-text">Ram</div>
+                    <div className="username-text">{user||"Hello user"}</div>
                     <div className="userrole-text">Engineer</div>
                   </div>
                 </div>
@@ -98,9 +110,9 @@ const Contacts = ({
                     <FontAwesomeIcon
                   icon={regular ("calendar-days")}
                 />
-             
+
                   {/* <Button classname={`common-styles-btn dates-filter`} value={"Select Date"} /> */}
-                <Button  classname={!showImportUI?'common-styles-btn dates-filter':"btn-before-glossy glossy-background"}
+                <Button  classname={(showImportUI || showDeleteUI)?'common-styles-btn dates-filter btn-before-glossy glossy-background':'common-styles-btn dates-filter'}
                  value={"Select Date"} />
                   <FontAwesomeIcon
                   icon={solid ("chevron-down")}
@@ -112,7 +124,8 @@ const Contacts = ({
                   icon={solid ("arrow-down-wide-short")}
                 />
                
-                  <Button   classname={!showImportUI?'common-styles-btn dates-filter':"btn-before-glossy glossy-background"} value={"Filters"} />
+                  <Button   classname={(showImportUI || showDeleteUI)?'common-styles-btn dates-filter btn-before-glossy glossy-background':'common-styles-btn dates-filter'}
+                   value={"Filters"} />
                   <FontAwesomeIcon
                   icon={solid ("chevron-down")}
                 />
@@ -128,7 +141,7 @@ const Contacts = ({
                     <Delete
                     showDeleteUI={showDeleteUI}
                     setshowDeleteUI={setshowDeleteUI}
-                       classname={!showImportUI?'common-styles-btn':"btn-before-glossy glossy-background"}
+                       classname={(showImportUI || showDeleteUI)?'common-styles-btn btn-before-glossy glossy-background':'common-styles-btn'}
                       setheader={setheader}
                       setDeleteTracking={setDeleteTracking}
                       deleteTracking={deleteTracking}
@@ -145,7 +158,8 @@ const Contacts = ({
                     icon={solid("arrow-down")}
                   />
                     <Button
-                classname={!showImportUI?'common-styles-btn import-btn':"btn-before-glossy glossy-background"}
+                    classname={(showImportUI || showDeleteUI)?'common-styles-btn import-btn btn-before-glossy glossy-background':'common-styles-btn import-btn'}
+                // classname={!showImportUI?'common-styles-btn import-btn':"btn-before-glossy glossy-background"}
                     //  classname={'common-styles-btn import-btn'}
                       // classname={`common-styles-btn`}
                       // inlinestyle={"custom-import-style"}
@@ -161,19 +175,25 @@ const Contacts = ({
                   <FontAwesomeIcon
                     icon={solid("arrow-up-from-bracket")}
                   />
-                
-                    <Button classname={!showImportUI?'common-styles-btn':"btn-before-glossy glossy-background"} value={"Export"} />
+              
+                    <Button
+ classname={(showImportUI || showDeleteUI)?'common-styles-btn btn-before-glossy glossy-background':'common-styles-btn'}
+
+                    // classname={!showImportUI?'common-styles-btn':"btn-before-glossy glossy-background"}
+                     value={"Export"} />
                   </div>
                 </div>
               </div>
               <div className="contacts-wrapper">
                 <ContactsBodyHead
+                showDeleteUI={showDeleteUI}
                  showImportUI={showImportUI}
                   changeCheckbox={changeCheckbox}
                   filewithoutnpm={filewithoutnpm}
                   header={header}
                 />
                 <ContactsBody 
+                showDeleteUI={showDeleteUI}
                   showImportUI={showImportUI}
                   searchedEmails={searchedEmails}
                   deleteTracking={deleteTracking}

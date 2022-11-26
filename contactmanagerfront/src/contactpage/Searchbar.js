@@ -1,7 +1,7 @@
 import React ,{useEffect, useState} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid, regular, brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
-const Searchbar = ({filewithoutnpm,searchedEmails,setSearchedEmails,showImportUI}) => {
+const Searchbar = ({filewithoutnpm,searchedEmails,setSearchedEmails,showImportUI,showDeleteUI}) => {
     const [searctText, setSearchText] = useState("")
     const [issearched,setSearched]=useState(false)
     const[showEmail,setShowEmail]=useState({})
@@ -59,7 +59,7 @@ const Searchbar = ({filewithoutnpm,searchedEmails,setSearchedEmails,showImportUI
     <FontAwesomeIcon className='fontaw-mag-glass'   icon={solid('magnifying-glass')}/>
       <input
         type="text"
-        className={!showImportUI?'input-search input-search-content':"input-search input-search-content glossy-background"}
+        className={(showImportUI||showDeleteUI) ?'input-search input-search-content glossy-background':"input-search input-search-content"}
 
         // className='input-search input-search-content'
         placeholder="Search contacts"

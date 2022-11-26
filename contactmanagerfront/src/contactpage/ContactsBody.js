@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
 import "../App.css";
 const ContactsBody = ({
+  showDeleteUI,
   showImportUI,
   filewithoutnpm,
   header,
@@ -27,14 +28,14 @@ const ContactsBody = ({
           // setDeleteTracking((pre)=>[...pre,{id:x._id,checked:false}]) //here not working ;;err: too many renders
           return (
             <div className="data-wrapper" key={i}>
-              <div className={showImportUI?"input-header":"input-header"}>
+              <div className={showImportUI||showDeleteUI?"input-header":"input-header"}>
               <input
                 data-index={String(i)}
                 onChange={(e) => changeCheckbox(e)}
                 id={x._id}
                 type={"checkbox"}
                 // style={{backgroundColor:"red"}}
-                className={showImportUI?"checkbox-background":""}
+                className={showImportUI||showDeleteUI?"checkbox-background":""}
                 checked={deleteTracking[i]?.checked}
               />
               </div>

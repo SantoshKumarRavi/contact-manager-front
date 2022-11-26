@@ -9,14 +9,14 @@ import {
   thin,
 } from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
 
-const ContactsBodyHead = ({showImportUI, filewithoutnpm, header, changeCheckbox }) => {
+const ContactsBodyHead = ({showDeleteUI,showImportUI, filewithoutnpm, header, changeCheckbox }) => {
   return (
     <div className="data-wrapper body-header">
       {filewithoutnpm?.datas?.length != 0 && header?.heading && (
         <div className="input-header">
           <input
             name="Deleteall"
-            className={showImportUI?"checkbox-background":""}
+            className={showImportUI||showDeleteUI?"checkbox-background":""}
             onChange={(e) => changeCheckbox(e)}
             type={"checkbox"}
           />

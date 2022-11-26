@@ -60,6 +60,9 @@ const Login = () => {
           // localStorage.setItem('status', "true");
           console.log("tooken from backend",res.data.jwt_token)
           value.setValue(res.data.jwt_token)
+    //       username:username,
+    // setName:(val)=>setUsername(()=>val)
+          value.setName(data.email)
           navigate("/contact");
         }
       });
