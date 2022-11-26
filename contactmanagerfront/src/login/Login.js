@@ -17,10 +17,7 @@ const Login = () => {
     const [errcolor, seterrcolor] = useState("#7f8c8d")
   
      const value=AuthConsumer()
-      // function login(){
-      //     value.setValue("fgdgd.sbssb.fsfbf")
-      //     navigate("/contact")
-      // }
+    
 
     function handleview(action) {
       if (action === "show") {
@@ -36,9 +33,7 @@ const Login = () => {
     function handleSubmit(e) {
       e.preventDefault();
   
-      // value.setValue("fgdgd.sbssb.fsfbf")
-      // navigate("/contact");
-      // return
+    
       if (!data.password || !data.email) {
         return alert("Kindly fill all the fields");
       }
@@ -48,20 +43,15 @@ const Login = () => {
         },
       };
       axios.post("http://localhost:8081/login", data, config).then((res) => {
-        // console.log("Im in");
       
         if(res.data.status!=="success"){
           seterrormsg(res.data.message)
           seterrcolor("red")
         }
-        // localStorage.setItem('token', res.data.jwt_token);
   
-        if (res.data.jwt_token !== undefined) { //imp
-          // localStorage.setItem('status', "true");
+        if (res.data.jwt_token !== undefined) { 
           console.log("tooken from backend",res.data.jwt_token)
           value.setValue(res.data.jwt_token)
-    //       username:username,
-    // setName:(val)=>setUsername(()=>val)
           value.setName(data.email)
           navigate("/contact");
         }
@@ -112,30 +102,3 @@ const Login = () => {
   }
 export default Login;
 
-
-
-
-
-
-
-
-// import React from "react";
-// import { useNavigate } from "react-router-dom";
-// import { AuthConsumer} from "../useauth/Useauth";
-
-// const Login = () => {
-//   const navigate = useNavigate();
-//   const value=AuthConsumer()
-// function login(){
-//     value.setValue("fgdgd.sbssb.fsfbf")
-//     navigate("/contact")
-// }
-//   return (
-//     <>
-//       <div>Login page</div>
-//       <button onClick={() => login()}>login</button>
-//     </>
-//   );
-// };
-
-// export default Login;

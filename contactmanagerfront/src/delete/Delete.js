@@ -13,17 +13,6 @@ function Appdelete({showDeleteUI,setshowDeleteUI,classname,deleteTracking,sethea
     setshowDeleteUI((prev) => !prev);
   }
 
-  // const [idObj,setIdObj]=useState({})
-
-  // let dummydata = [
-  //   { color: "red", value: "#f00" },
-  //   { color: "green", value: "#0f0" },
-  //   { color: "blue", value: "#00f" },
-  //   { color: "cyan", value: "#0ff" },
-  //   { color: "magenta", value: "#f0f" },
-  //   { color: "yellow", value: "#ff0" },
-  //   { color: "black", value: "#000" },
-  // ];
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -178,11 +167,7 @@ function Appdelete({showDeleteUI,setshowDeleteUI,classname,deleteTracking,sethea
           </div>
         )}
       </div>
-      {/* {dummydata.map((x, i) => (
-        <div key={i}>
-          color :{x.color} ; value {x.value}
-        </div>
-      ))} */}
+
     </>
   );
 }

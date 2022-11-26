@@ -8,8 +8,12 @@ import {
   thin,
 } from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
 import "../App.css";
-// import ReactTooltip from 'react-tooltip';
+// import ReactTooltip from 'react-tooltip'; VscTrash
 import HoverOver from "../components/HoverOver";
+import {GrEdit} from "react-icons/gr";
+import { VscTrash} from "react-icons/vsc";
+
+
 
 const ContactsBody = ({
   showDeleteUI,
@@ -20,17 +24,7 @@ const ContactsBody = ({
   deleteTracking,
   searchedEmails
 }) => {
-  // const [isHovering, setIsHovering] = useState(false);
-
-  // function handleMouseOver(){
-  //   console.log("im hovered")
-  //   setIsHovering(true)
-  // }
-  // function handleMouseOut(){
-  //   console.log("im out")
-  //   setIsHovering(false)
-  // }
-  // console.log("data inside bpody",filewithoutnpm.datas)
+  
   return (
     <>
       {!searchedEmails?.datas?.length&&header?.heading &&
@@ -105,12 +99,9 @@ const ContactsBody = ({
                 </div>
                 <div className="action-wrapper">
                 <div  className="Action content-action">
-                <FontAwesomeIcon
-                    icon={solid ("pencil")}
-                  />
-                   <FontAwesomeIcon
-                    icon={solid ("trash-can")}
-                  />
+                  <GrEdit/>
+                
+                  <VscTrash/>
                 </div>
                 </div>
               </div>

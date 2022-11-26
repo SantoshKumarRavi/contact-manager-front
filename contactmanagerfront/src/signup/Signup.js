@@ -19,7 +19,6 @@ const Signup = () => {
     const [errcolor, seterrcolor] = useState("#7f8c8d")
 
     function popup() {
-        // console.log("clicked")
         setPopStyle({ visibility: "visible" })
 
 
@@ -127,20 +126,3 @@ const Signup = () => {
 
 export default Signup;
 
-
-// import React from "react";
-// import { useNavigate } from "react-router-dom";
-
-// const Signup = () => {
-//   const navigate = useNavigate();
-
-//   return (
-//     <>
-//       <div>Signup</div>
-
-//       <button onClick={() => navigate("/login")}>Signup</button>
-//     </>
-//   );
-// };
-
-// export default Signup;

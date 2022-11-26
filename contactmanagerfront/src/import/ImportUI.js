@@ -10,21 +10,10 @@ import Contacts from "../contactpage/Contacts";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid, regular, brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
-// import 'font-awesome/css/font-awesome.min.css'; //import in react app
-// import {FontAwesomeIcon} from "@fortawesome/free-solid-svg-icons"
-// import {AuthproviderWrapper} from "../App"
-// import UseAuth from "../useauth/Useauth"
-/*
-    "papaparse": "^5.3.2",
-*/
+
 
 function ImportUI() {
   const navigate = useNavigate();
-  // if(value.accesstoken==""){
-  //   navigate("/login")
-  //   return 
-  // }
-
 
   const [showImportUI, setshowImportUI] = useState(false);
   const [showDeleteUI, setshowDeleteUI] = useState(false);
@@ -36,10 +25,8 @@ function ImportUI() {
   }
   const [filewithoutnpm, setfilewithoutnpm] = useState({});
 const value=AuthConsumer()
-// username:username,
-// setName:(val)=>setUsername(()=>val)
+
 console.log("data from context",value.accesstoken)
-// console.log("history",history.action)
 
   useEffect(()=>{ // as of not requird for im not connecting db ..now css
     (async function getData() {
@@ -79,42 +66,23 @@ console.log("data from context",value.accesstoken)
       document.removeEventListener("click", handleClickOutside, false);
     };
   }, []);
-  // function handleChange(e) { //only drag
-  //   //for onclicking to upload
-  //   console.log("handle cjhaming", e.target.files[0]);
-  // }
-  // const [deletedArray,setDeleteArray]=useState([])
+
   const [deleteTracking,setDeleteTracking]=useState([])
   const[header,setheader]=useState({})
   const[successImport,setsuccessImport]=useState(false) //false
-  // const[checked,setChecked]=useState(false)
-
-//frm 78 -importnat 
+ 
 
   useEffect(async()=>{ //temp closed due to highlighting
-    // console.log("dele tra ",deleteTracking)
+    // value.accesstoken="fdfdvf" // as of now
     if(value.accesstoken==""){
         console.log("it is empty acces demied") 
-        navigate("/unauthorized")
+        navigate("/login")
     }else{
-      // if(filewithoutnpm?.datas){
         let dats=await filewithoutnpm.datas
         console.log("file nom",dats)
-        // setheader(()=>{
-        //   return ({heading:["Name","email","designmatuon"]})})
-      // }
       console.log(value.accesstoken ,"granted")
     }
-    // if(filewithoutnpm.datas){
-    //   console.log("useEffect if",filewithoutnpm)
-    //   console.log("useEffect if deletedArray",deletedArray)
-
-    // }else{
-    //   console.log("useEffect else",filewithoutnpm)
-    //   console.log("useEffect else deletedArray",deletedArray)
-
-    // }
-  },[])
+    },[])
 
   useEffect(()=>{ // important to clear the sucess //css
     if(successImport){
@@ -128,9 +96,7 @@ console.log("data from context",value.accesstoken)
   },[successImport])
 
 
-  // const data= AuthConsumer();
-    // const aurth= UseAuth();
-  // console.log("accesstoken",data)
+
 
   function drop(e) {
     e.preventDefault();
@@ -154,13 +120,10 @@ console.log("data from context",value.accesstoken)
             return ({heading:columns})})
           setfilewithoutnpm((prev)=>{
             if(prev.datas==undefined){
-              //  deletedArray=new Array(parsedData.length)
               saveddata.data.forEach(element => {
                 console.log("ele ",element)
                 setDeleteTracking((prev)=>[...prev,{id:element._id,checked:false}])
 
-                // [{id="gungu",name},{},{}]
-                // setDeleteTracking([{id:gungu,checked:false}])
 
               });
               return {datas:saveddata.data}
@@ -175,18 +138,8 @@ console.log("data from context",value.accesstoken)
               return {datas:updated}
             }
           })
-          // .then(()=>{
-          //   if(deleteTracking.length==0){
-          
-    
-          //   }else{
-    
-          //   }
-
-          // });
-
+        
         })
-          // return response.json(); // parses JSON response into native JavaScript objects
         })()
 
       }
@@ -216,12 +169,9 @@ console.log("data from context",value.accesstoken)
     console.log("clicked")
   }
   function cancel_import(){
-    // setfilewithoutnpm({}) //if user 2nd time click after sucessfull fetching, it will erase data..
     setshowImportUI(false)
   }
-  // const[check,setCheck]=useState(false)
   function changeCheckbox(e){
-    // setChecked((prev)=>!prev)
     if(e.target.name=="Deleteall"){
       console.log(e.target.checked)
       let updatedDeletedTracking=[...deleteTracking]
@@ -238,16 +188,12 @@ console.log("data from context",value.accesstoken)
       console.log("defore delete onchange ",deleteTracking)
       // setCheck(()=>!e.target.checked)
       console.log("ids",e.target) //<input id index type={check}>
-      //console.log("ids",e.target.id) //<input id index type={check}>
-      // console.log("index",e.target?.dataset.index)
       let indexToBeUpdated=parseInt(e.target?.dataset?.index)
       let updatedDeletedTracking=[...deleteTracking]
       updatedDeletedTracking[indexToBeUpdated]={...updatedDeletedTracking[indexToBeUpdated],checked:!updatedDeletedTracking[indexToBeUpdated].checked}
       console.log("delete",updatedDeletedTracking)
       setDeleteTracking(()=>updatedDeletedTracking)
-      // console.log("ids",e.target.id.objid)
-      // console.log("ids",e.target.id.index)
-
+    
     }
   
   }
@@ -336,16 +282,3 @@ function logoutfunction(){
 }
 
 export default ImportUI;
-
-
-/*
-1)filewuthoum ====id,name.email......map((x,i))
-
-1.1)<input occhnge={} index={i} id={x.id}>
-
-2)deletracj====id, checjed :false
-
-ref ::    [{id, checjed :false},{id, checjed :false}]
-
-
-*/

@@ -1,4 +1,4 @@
-import React ,{useState} from "react";
+import React ,{useEffect, useState} from "react";
 import ContactsBodyHead from "./ContactsBodyHead";
 import ContactsBody from "./ContactsBody";
 import Delete from "../delete/Delete";
@@ -12,8 +12,14 @@ import {
   icon,
   thin,
 } from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
-import "../App.css";
+import "../App.css";//GrEdit
 import { AuthConsumer } from "../useauth/Useauth";
+import { MdOutlineDashboard,MdOutlineContacts ,MdOutlineImportExport,MdDeleteOutline } from "react-icons/md";
+import { BiFilter,BiExport,BiCalendar } from "react-icons/bi";
+import {FiChevronDown} from "react-icons/fi";
+
+
+
 // username:username,
 // setName:(val)=>setUsername(()=>val)
 
@@ -39,25 +45,34 @@ let user=value?.username?.split("@")[0].split("")
   let firstletter=user[0]?.toUpperCase()
   let remaining=user?.slice(1).join("")
   user=firstletter+remaining
+  
+  useEffect(()=>{ //not working
+     if(user==undefined){
+      user="Hello user"
+    }
+  },[user])
   return (
     <>
       <div className="Contact-page-wrapper">
         <div className="aside-wrapper">
           <div className="aside-logo-container">
             <div className="logo-container">
-              <div className="main-logo">Logo</div>
+              <div className="main-logo">
+                <p className="logo-main-text" >Logo</p>
+                </div>
             </div>
             <div className="aside-contact-header">
               <div className="child-aside">
-                <img alt="dash-icon" className="img-dash" src={"dash.png"} />
-    
+                {/* <img alt="dash-icon" className="img-dash" src={"dash.png"} /> */}
+                  <MdOutlineDashboard className="dash"/>
                 <p className="dash-text">Dashboard</p>
               </div>
               <div className="child-aside ">
-                <FontAwesomeIcon
+                {/* <FontAwesomeIcon
                   className="fontaw-contacts-icon"
                   icon={regular("id-badge")}
-                />
+                /> */}
+                <MdOutlineContacts className="total-contacts"/>
                 <div  className="dash-text-border">
                 <div className="dash-text dash-text-total ">Total contacts</div>                
                 </div>
@@ -95,7 +110,7 @@ let user=value?.username?.split("@")[0].split("")
                     src={"user.png"}/>
                   </div>
                   <div className="data-container">
-                    <div className="username-text">{user||"Hello user"}</div>
+                    <div className="username-text">{user}</div>
                     <div className="userrole-text">Engineer</div>
                   </div>
                 </div>
@@ -107,37 +122,42 @@ let user=value?.username?.split("@")[0].split("")
               <div className="header-btn-wrapper">
                 <div className="filtered-container">
                   <div className="date-container">
-                    <FontAwesomeIcon
+                    {/* <FontAwesomeIcon
                   icon={regular ("calendar-days")}
-                />
+                /> */}
+                <BiCalendar className="react-icon-common"/>
 
                   {/* <Button classname={`common-styles-btn dates-filter`} value={"Select Date"} /> */}
                 <Button  classname={(showImportUI || showDeleteUI)?'common-styles-btn dates-filter btn-before-glossy glossy-background':'common-styles-btn dates-filter'}
                  value={"Select Date"} />
-                  <FontAwesomeIcon
+                  {/* <FontAwesomeIcon
                   icon={solid ("chevron-down")}
-                />
+                /> */}
+                <FiChevronDown className="react-icon-common"/>
 
                   </div>
                   <div className="filter-details-wrapper">
-                  <FontAwesomeIcon
+                  {/* <FontAwesomeIcon
                   icon={solid ("arrow-down-wide-short")}
-                />
+                /> */}
+                      <BiFilter  className="react-icon-common" />
                
                   <Button   classname={(showImportUI || showDeleteUI)?'common-styles-btn dates-filter btn-before-glossy glossy-background':'common-styles-btn dates-filter'}
                    value={"Filters"} />
-                  <FontAwesomeIcon
+                  {/* <FontAwesomeIcon
                   icon={solid ("chevron-down")}
-                />
+                /> */}
+                   <FiChevronDown  className="react-icon-common"/>
+
                   </div>
                 </div>
                 <div className="import-export-container">
                 <div className="common-btn-container">
-                  <FontAwesomeIcon
+                  {/* <FontAwesomeIcon
                     className="fontaw-tick"
                     icon={solid("trash-can")}
-                  />
-                
+                  /> */}
+                <MdDeleteOutline  className="react-icon-common delete"/>
                     <Delete
                     showDeleteUI={showDeleteUI}
                     setshowDeleteUI={setshowDeleteUI}
@@ -151,18 +171,15 @@ let user=value?.username?.split("@")[0].split("")
                   </div>
 
                   <div className="common-btn-container">
-                  <FontAwesomeIcon
+                  {/* <FontAwesomeIcon
                     icon={solid("arrow-up")}
                   />
                    <FontAwesomeIcon
                     icon={solid("arrow-down")}
-                  />
+                  /> */}
+                  <MdOutlineImportExport  className="react-icon-common delete"/>
                     <Button
                     classname={(showImportUI || showDeleteUI)?'common-styles-btn import-btn btn-before-glossy glossy-background':'common-styles-btn import-btn'}
-                // classname={!showImportUI?'common-styles-btn import-btn':"btn-before-glossy glossy-background"}
-                    //  classname={'common-styles-btn import-btn'}
-                      // classname={`common-styles-btn`}
-                      // inlinestyle={"custom-import-style"}
                       showUI={showImportUI}
                       showref={showUIref_btn}
                       functionality={updateshowImportUI}
@@ -172,14 +189,14 @@ let user=value?.username?.split("@")[0].split("")
                  
 
                   <div className="common-btn-container">
-                  <FontAwesomeIcon
+                  {/* <FontAwesomeIcon
                     icon={solid("arrow-up-from-bracket")}
-                  />
+                  /> */}
+                  <BiExport  className="react-icon-common delete"/>
               
                     <Button
  classname={(showImportUI || showDeleteUI)?'common-styles-btn btn-before-glossy glossy-background':'common-styles-btn'}
 
-                    // classname={!showImportUI?'common-styles-btn':"btn-before-glossy glossy-background"}
                      value={"Export"} />
                   </div>
                 </div>
@@ -204,7 +221,9 @@ let user=value?.username?.split("@")[0].split("")
               </div>
             </div>
           </div>
-          <div className="pagination"></div>
+          <div className="pagination">
+
+          </div>
         </div>
       </div>
     </>

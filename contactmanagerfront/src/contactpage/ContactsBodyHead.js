@@ -8,7 +8,7 @@ import {
   icon,
   thin,
 } from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
-
+import {TiArrowUnsorted} from "react-icons/ti";
 const ContactsBodyHead = ({showDeleteUI,showImportUI, filewithoutnpm, header, changeCheckbox }) => {
   return (
     <div className="data-wrapper body-header">
@@ -39,23 +39,8 @@ const ContactsBodyHead = ({showDeleteUI,showImportUI, filewithoutnpm, header, ch
                 >
                   <>{ele}</>
                   <div  className={(ele=="Designation")||(ele=="Company")?'up-down-logo-container desig-company':"up-down-logo-container"}>
-                    <div className="up-down font-up">
-                      <div  className="fontaws-ups">
-                      <FontAwesomeIcon
-                       icon={solid("caret-up")}
-                     />
-                      </div>
-                   
-                    </div>
-                    {
-                      <div className="up-down font-up font-down">
-                        <FontAwesomeIcon
-                          className="ontaws-ups"
-                          icon={solid("caret-down")}
-                        />
-                      </div>
-                    }
-                  </div>
+                      <TiArrowUnsorted/>
+                   </div>
                 </div>
               );
             }

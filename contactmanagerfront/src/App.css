@@ -328,6 +328,7 @@ color: #1F2633;
   flex-direction: row;
 }
 .aside-wrapper{
+  background-color:#CEF3FF;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -371,21 +372,46 @@ color: #1F2633;
   display: flex;
   width: 80%;
   height: 50%;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   align-items: center;
 }
 .main-logo{
-  /* background-color: #2DA5FC; */
-  margin-top: 30px;
+  width: 83px;
+  height: 61px;
+  margin-top: -10px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 40px;
 }
-.child-aside > img{
+.logo-main-text{
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 600;
+font-size: 30px;
+line-height: 40px;
+color: #0884FF;
+/* width: 100%; */
+/* background-color:tomato; */
+
+}
+/* .child-aside > img{
   width: 20%;
   margin-right: -20px;
   height: 50%;
+} */
+.dash{
+  width: 40%;
+  /* margin-right: -20px; */
+  height: 50%;
 }
-.child-aside > p{
-  padding: 0%;
+.total-contacts{
+  width: 40%;
+  height: 50%;
+margin-left: 5px;
 }
+/* .child-aside > p{
+  padding: -10%;
+} */
 .fontaw-contacts-icon{
   /* width: 100px; */
   margin-left: 10px;
@@ -517,8 +543,19 @@ color: #1F2633;
   align-items: center;
   height: 60%;
 }
+.react-icon-common{
+  width: 20%;
+  height: 80%;
+}
+.filter{
+  width: 40%;
+}
+.delete{
+  width: 40%;
+  height: 100%;
+}
 .filter-details-wrapper{
-  width: 35%;
+  width: 42%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -621,7 +658,7 @@ align-items: center;
 }
 .content-action{
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 .logo-text-wrapper {
@@ -717,11 +754,20 @@ border-right: 3px solid black;
 .blue{
   color: rgb(0, 214, 252);
 }
-/* 
+
 #tool:hover.tip {
-  color: rgb(0, 214, 252);
+  color: rgb(70, 98, 103);
+}
+
+/* #tool > .tool-inner {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #062e56;
 } */
 
+/* .__react_component_tooltip.place-top:after {
+  left: 10px;
+  } */
 
 
 
