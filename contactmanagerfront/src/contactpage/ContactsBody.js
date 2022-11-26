@@ -8,6 +8,9 @@ import {
   thin,
 } from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
 import "../App.css";
+// import ReactTooltip from 'react-tooltip';
+import HoverOver from "../components/HoverOver";
+
 const ContactsBody = ({
   showDeleteUI,
   showImportUI,
@@ -17,8 +20,17 @@ const ContactsBody = ({
   deleteTracking,
   searchedEmails
 }) => {
+  // const [isHovering, setIsHovering] = useState(false);
 
-  console.log("data inside bpody",filewithoutnpm.datas)
+  // function handleMouseOver(){
+  //   console.log("im hovered")
+  //   setIsHovering(true)
+  // }
+  // function handleMouseOut(){
+  //   console.log("im out")
+  //   setIsHovering(false)
+  // }
+  // console.log("data inside bpody",filewithoutnpm.datas)
   return (
     <>
       {!searchedEmails?.datas?.length&&header?.heading &&
@@ -29,6 +41,7 @@ const ContactsBody = ({
           return (
             <div className="data-wrapper" key={i}>
               <div className={showImportUI||showDeleteUI?"input-header":"input-header"}>
+      
               <input
                 data-index={String(i)}
                 onChange={(e) => changeCheckbox(e)}
@@ -45,8 +58,12 @@ const ContactsBody = ({
               <div className="Designation  common-header-styles remove-border glossy-background">{x.Designation}</div>
               <div className="Company  common-header-styles remove-border glossy-background">{x.Company}</div>
               <div className="Industry  common-header-styles remove-border glossy-background">{x.Industry}</div>
-              <div className="Email  common-header-styles remove-border glossy-background">{x.Email}</div>
-              <div className="Phonenumber  common-header-styles remove-border glossy-background">{x.Phonenumber}</div>
+              <HoverOver Email={x.Email} Phonenumber={x.Phonenumber} />
+              {/* <ReactTooltip  place='bottom' id='tool'/> */}
+              {/* <div className="Email  common-header-styles remove-border glossy-background tip" 
+              onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} data-for='tool' data-tip={x.Email}
+              >{x.Email}</div> */}
+              {/* <div className={isHovering?'blue Phonenumber  common-header-styles remove-border glossy-background':"Phonenumber  common-header-styles remove-border glossy-background"}>{x.Phonenumber}</div> */}
               <div className="Country  common-header-styles remove-border glossy-background">{x.Country}</div>
               </div>
               <div className="action-wrapper">

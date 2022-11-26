@@ -711,6 +711,16 @@ border-right: 3px solid black;
   opacity: 0.1;
 }
 
+:hover.tip {
+  color: rgb(0, 214, 252);
+}
+.blue{
+  color: rgb(0, 214, 252);
+}
+/* 
+#tool:hover.tip {
+  color: rgb(0, 214, 252);
+} */
 
 
 
