@@ -1,0 +1,194 @@
+import React ,{useState} from "react";
+import ContactsBodyHead from "./ContactsBodyHead";
+import ContactsBody from "./ContactsBody";
+import Delete from "../delete/Delete";
+import Button from "../components/Button";
+import Searchbar from "./Searchbar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  solid,
+  regular,
+  brands,
+  icon,
+  thin,
+} from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
+import "../App.css";
+const Contacts = ({
+  showImportUI,
+  updateshowImportUI,
+  showUIref_btn,
+  filewithoutnpm,
+  header,
+  changeCheckbox,
+  deleteTracking,
+  setfilewithoutnpm,
+  setheader,
+  setDeleteTracking,
+  logoutfunction,
+}) => {
+  const [searchedEmails,setSearchedEmails]=useState({})
+  const [showDeleteUI, setshowDeleteUI] = useState(false);
+
+
+  return (
+    <>
+      <div className="Contact-page-wrapper">
+        <div className="aside-wrapper">
+          <div className="aside-logo-container">
+            <div className="logo-container">
+              <div className="main-logo">Logo</div>
+            </div>
+            <div className="aside-contact-header">
+              <div className="child-aside">
+                <img alt="dash-icon" className="img-dash" src={"dash.png"} />
+    
+                <p className="dash-text">Dashboard</p>
+              </div>
+              <div className="child-aside ">
+                <FontAwesomeIcon
+                  className="fontaw-contacts-icon"
+                  icon={regular("id-badge")}
+                />
+                <div  className="dash-text-border">
+                <div className="dash-text dash-text-total ">Total contacts</div>                
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="aside-logout-container">
+            <div className={"logo-content-wrapper"} >
+            <FontAwesomeIcon
+                    icon={solid("right-from-bracket")}
+                  />
+            <button className={showImportUI?"btn-before-glossy glossy-background":"btn-before-glossy"}  onClick={() => logoutfunction()}>
+                Logout
+                </button>
+            </div>
+          </div>
+        </div>
+        <div className="main-page-wrapper">
+          <div className="header-wrapper">
+            <div className="header">
+              <p>Total contacts</p>
+            </div>
+            <div className="search-wrapper">
+              <div className="search-bar-wrapper">
+                <div className="search-bar">
+                    <Searchbar showImportUI={showImportUI} setSearchedEmails={setSearchedEmails} searchedEmails={searchedEmails} filewithoutnpm={filewithoutnpm}/>
+                </div>
+              </div>
+              <div className="usersdetails-container">
+                <div className="logo-data-wrapper">
+                  <div className="user-logo-container">
+                    <img src={"user.png"}/>
+                  </div>
+                  <div className="data-container">
+                    <div className="username-text">Ram</div>
+                    <div className="userrole-text">Engineer</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="main-content-wrapper">
+            <div className="main-body-content-wrapper">
+              <div className="header-btn-wrapper">
+                <div className="filtered-container">
+                  <div className="date-container">
+                    <FontAwesomeIcon
+                  icon={regular ("calendar-days")}
+                />
+             
+                  {/* <Button classname={`common-styles-btn dates-filter`} value={"Select Date"} /> */}
+                <Button  classname={!showImportUI?'common-styles-btn dates-filter':"btn-before-glossy glossy-background"}
+                 value={"Select Date"} />
+                  <FontAwesomeIcon
+                  icon={solid ("chevron-down")}
+                />
+
+                  </div>
+                  <div className="filter-details-wrapper">
+                  <FontAwesomeIcon
+                  icon={solid ("arrow-down-wide-short")}
+                />
+               
+                  <Button   classname={!showImportUI?'common-styles-btn dates-filter':"btn-before-glossy glossy-background"} value={"Filters"} />
+                  <FontAwesomeIcon
+                  icon={solid ("chevron-down")}
+                />
+                  </div>
+                </div>
+                <div className="import-export-container">
+                <div className="common-btn-container">
+                  <FontAwesomeIcon
+                    className="fontaw-tick"
+                    icon={solid("trash-can")}
+                  />
+                
+                    <Delete
+                    showDeleteUI={showDeleteUI}
+                    setshowDeleteUI={setshowDeleteUI}
+                       classname={!showImportUI?'common-styles-btn':"btn-before-glossy glossy-background"}
+                      setheader={setheader}
+                      setDeleteTracking={setDeleteTracking}
+                      deleteTracking={deleteTracking}
+                      filewithoutnpm={filewithoutnpm}
+                      setfilewithoutnpm={setfilewithoutnpm}
+                    />
+                  </div>
+
+                  <div className="common-btn-container">
+                  <FontAwesomeIcon
+                    icon={solid("arrow-up")}
+                  />
+                   <FontAwesomeIcon
+                    icon={solid("arrow-down")}
+                  />
+                    <Button
+                classname={!showImportUI?'common-styles-btn import-btn':"btn-before-glossy glossy-background"}
+                    //  classname={'common-styles-btn import-btn'}
+                      // classname={`common-styles-btn`}
+                      // inlinestyle={"custom-import-style"}
+                      showUI={showImportUI}
+                      showref={showUIref_btn}
+                      functionality={updateshowImportUI}
+                      value={"Import"}
+                    />
+                  </div>
+                 
+
+                  <div className="common-btn-container">
+                  <FontAwesomeIcon
+                    icon={solid("arrow-up-from-bracket")}
+                  />
+                
+                    <Button classname={!showImportUI?'common-styles-btn':"btn-before-glossy glossy-background"} value={"Export"} />
+                  </div>
+                </div>
+              </div>
+              <div className="contacts-wrapper">
+                <ContactsBodyHead
+                 showImportUI={showImportUI}
+                  changeCheckbox={changeCheckbox}
+                  filewithoutnpm={filewithoutnpm}
+                  header={header}
+                />
+                <ContactsBody 
+                  showImportUI={showImportUI}
+                  searchedEmails={searchedEmails}
+                  deleteTracking={deleteTracking}
+                  changeCheckbox={changeCheckbox}
+                  filewithoutnpm={filewithoutnpm}
+                  header={header}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="pagination"></div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Contacts;
