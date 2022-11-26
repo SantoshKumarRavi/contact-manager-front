@@ -1,6 +1,14 @@
-.table{
-    border: 1px solid black;
-    table-layout: auto;
-    text-align: right;
-    border-collapse: collapse;
+.table {
+  border: 1px solid black;
+  table-layout: auto;
+  text-align: right;
+  border-collapse: collapse;
+}
+
+:hover.tip {
+  color: rgb(0, 214, 252);
+}
+
+#tool:hover.tip {
+  color: rgb(0, 214, 252);
 }
