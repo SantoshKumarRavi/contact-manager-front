@@ -6,7 +6,7 @@ import React from "react";
 // import {useDropzone} from 'react-dropzone';
 import { Link, BrowserRouter as Router, Routes, Route ,Navigate} from "react-router-dom";
 import ImportUI from "./import/ImportUI";
-import Appdelete from "./Appdelete";
+// import Appdelete from "./Appdelete";
 import { AuthProvider } from "../src/useauth/Useauth";
 import Signup from "./signup/Signup"
 import Login  from "./login/Login";
