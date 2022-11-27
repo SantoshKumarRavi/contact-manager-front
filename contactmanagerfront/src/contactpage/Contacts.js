@@ -6,11 +6,7 @@ import Button from "../components/Button";
 import Searchbar from "./Searchbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  solid,
-  regular,
-  brands,
-  icon,
-  thin,
+  solid
 } from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
 import "../App.css"; //GrEdit
 import { AuthConsumer } from "../useauth/Useauth";
@@ -60,7 +56,7 @@ const Contacts = ({
       let filearray = [...filewithoutnpm?.datas];
       if (filearray?.length > 9) {
         let additional = parseInt(filearray?.length / 9);
-        if (filearray.length % 9 != 0) {
+        if (filearray.length % 9 !== 0) {
           additional = additional + 1;
         }
         let pageArray = [];
@@ -84,10 +80,10 @@ const Contacts = ({
       currentpage * 9 - 9,
       currentpage * 9
     );
-    if (checkslice?.length == 0 && currentpage != 1) {
+    if (checkslice?.length === 0 && currentpage !== 1) {
       setCurrentpage((prev) => prev - 1);
     }
-  }, [filewithoutnpm]);
+  }, [filewithoutnpm,currentpage]);
   function changepages(e) {
     let pagenumber = e.target.id;
     setCurrentpage(() => pagenumber);
@@ -159,6 +155,7 @@ const Contacts = ({
                 <div className="logo-data-wrapper">
                   <div className="user-logo-container">
                     <img
+                      alt="user"
                       className={
                         showImportUI || showDeleteUI ? "glossy-image" : ""
                       }

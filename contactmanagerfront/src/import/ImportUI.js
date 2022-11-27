@@ -1,19 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../App.css";
-import Button from "../components/Button";
 import Papa from "papaparse";
-import Delete from "../delete/Delete";
 import { AuthConsumer } from "../useauth/Useauth";
 import { useNavigate } from "react-router-dom";
-import { Navigate } from "react-router-dom";
 import Contacts from "../contactpage/Contacts";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  solid,
-  regular,
-  brands,
-  icon,
+  solid
 } from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
 
 function ImportUI() {
@@ -46,7 +40,7 @@ function ImportUI() {
           setfilewithoutnpm(() => {
             return { datas: fetcheddata.data };
           });
-          if (fetcheddata?.data?.length != 0) {
+          if (fetcheddata?.data?.length !== 0) {
             fetcheddata.data.forEach((element) => {
               setDeleteTracking((prev) => [
                 ...prev,
@@ -69,7 +63,7 @@ function ImportUI() {
           }
         });
     })();
-  }, []);
+  }, [value.userid]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -92,15 +86,13 @@ function ImportUI() {
   const [header, setheader] = useState({});
   const [successImport, setsuccessImport] = useState(false); //false
 
-  useEffect(async () => {
+  useEffect( () => {
     //temp closed due to highlighting
     // value.accesstoken="fdfdvf" // as of now
-    if (value.accesstoken == "") {
+    if (value.accesstoken === "") {
       navigate("/login");
-    } else {
-      let dats = await filewithoutnpm.datas;
     }
-  }, []);
+  }, [navigate,value.accesstoken]);
 
   useEffect(() => {
     // important to clear the sucess //css
@@ -115,7 +107,7 @@ function ImportUI() {
   function drop(e) {
     e.preventDefault();
     const reader = new FileReader();
-    const userId = value.userid;
+    const userId = value.userid
     reader.onload = async ({ target }) => {
       const csv = Papa.parse(target.result, { header: true });
       const parsedData = csv?.data;
@@ -136,7 +128,7 @@ function ImportUI() {
                 return { heading: columns };
               });
               setfilewithoutnpm((prev) => {
-                if (prev.datas == undefined) {
+                if (prev.datas === undefined) {
                   saveddata.data.forEach((element) => {
                     setDeleteTracking((prev) => [
                       ...prev,
@@ -188,7 +180,7 @@ function ImportUI() {
   }
   function changeCheckbox(e) {
     // t?.checked)
-    if (e.target.name == "Deleteall") {
+    if (e.target.name === "Deleteall") {
       let updatedDeletedTracking = [...deleteTracking];
       // updatedDeletedTracking[indexToBeUpdated]={...updatedDeletedTracking[indexToBeUpdated],checked:!updatedDeletedTracking[indexToBeUpdated].checked}
       updatedDeletedTracking = updatedDeletedTracking.map((obj) => {
@@ -262,7 +254,7 @@ function ImportUI() {
                   <div className="circle-logo-drag">
                     <div className="import-logo">
                       {/* <img  src={require("../icons/file.png")}/> */}
-                      <img src="https://img.icons8.com/glyph-neue/64/null/new-by-copy.png" />
+                      <img alt="import-logo" src="https://img.icons8.com/glyph-neue/64/null/new-by-copy.png" />
                     </div>
                   </div>
                   <div className="over-the-input-files">

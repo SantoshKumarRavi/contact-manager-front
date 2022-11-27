@@ -1,14 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import "../App.css";
 import Button from "../components/Button";
-import AuthProvider from "../useauth/Useauth";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  solid,
-  regular,
-  brands,
-  icon,
+  solid
 } from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
 function Appdelete({
   showDeleteUI,
@@ -40,11 +36,13 @@ function Appdelete({
         setshowDeleteUI(false);
       }
     };
-    document.addEventListener("click", handleClickOutside, false);
+    if(!showDeleteUI){
+      document.addEventListener("click", handleClickOutside, false);
+    }
     return () => {
       document.removeEventListener("click", handleClickOutside, false);
     };
-  }, []);
+  }, [setshowDeleteUI,showDeleteUI]);
   useEffect(() => {
     // imp for claer
     if (contactDeleted) {
@@ -53,7 +51,7 @@ function Appdelete({
         setContactDeleted(false);
       }, 1000);
     }
-  }, [contactDeleted]);
+  }, [contactDeleted,setshowDeleteUI]);
 
   function deleteFiles() {
     let idsArray = [];
@@ -90,10 +88,12 @@ function Appdelete({
             }
           });
           let updatedAfterDelete = [...filewithoutnpm?.datas];
-          updatedAfterDelete = updatedAfterDelete.filter((ele) => {
+          updatedAfterDelete = updatedAfterDelete.filter((ele) => {        
+            let value=0    
             if (!hashmap.has(ele._id)) {
-              return 1;
+              value=1
             }
+            return value;
           });
 
           // setshowDeleteUI(false)
@@ -102,9 +102,11 @@ function Appdelete({
           let updatedDeletedtrackingIds = [...deleteTracking];
           updatedDeletedtrackingIds = updatedDeletedtrackingIds.filter(
             (ele) => {
+              let value=0
               if (!hashmap.has(ele.id)) {
-                return 1;
+                value=1
               }
+              return value;
             }
           );
           setDeleteTracking(() => [...updatedDeletedtrackingIds]);

@@ -1,12 +1,4 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  solid,
-  regular,
-  brands,
-  icon,
-  thin,
-} from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
 import "../App.css";
 // import ReactTooltip from 'react-tooltip'; VscTrash
 import HoverOver from "../components/HoverOver";
@@ -28,8 +20,9 @@ const ContactsBody = ({
 }) => {
   function deletebyicon(e) {
     let tobedeletedIndex = parseInt(e?.target?.dataset?.svgindex);
-    let idsArray = [deleteTracking[tobedeletedIndex]?.id](
-      async function deleteData() {
+
+    let idsArray = [deleteTracking[tobedeletedIndex]?.id];
+    (async function deleteData() {
         tobedeletedIndex = parseInt(e.target?.dataset?.svgindex);
         await fetch("http://localhost:8081/contacts", {
           method: "DELETE",
@@ -42,17 +35,21 @@ const ContactsBody = ({
           .then((removed) => {
             let updatedAfterDelete = [...filewithoutnpm?.datas];
             updatedAfterDelete = updatedAfterDelete.filter((ele, i) => {
-              if (tobedeletedIndex != i) {
-                return 1;
+              let value=0;
+              if (tobedeletedIndex !== i) {
+                value=1;
               }
+              return value;
             });
             setfilewithoutnpm({ datas: updatedAfterDelete });
             let updatedDeletedtrackingIds = [...deleteTracking];
             updatedDeletedtrackingIds = updatedDeletedtrackingIds.filter(
               (ele, i) => {
-                if (tobedeletedIndex != i) {
-                  return 1;
+                let value=0
+                if (tobedeletedIndex !== i) {
+                  value=1
                 }
+                return value;
               }
             );
             setDeleteTracking(() => [...updatedDeletedtrackingIds]);

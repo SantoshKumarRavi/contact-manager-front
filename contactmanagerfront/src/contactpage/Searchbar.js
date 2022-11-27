@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  solid,
-  regular,
-  brands,
-  icon,
+  solid
 } from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
 const Searchbar = ({
   filewithoutnpm,
@@ -21,7 +18,7 @@ const Searchbar = ({
     // {_id: '637e091f6a0c229c73f2103e', name: 'Shantosh', email: 'shantosh@gmail.com'}
     let search = e.target.value;
     setSearchText(search);
-    if (search == "") {
+    if (search === "") {
       setSearched(false);
       setSearchedEmails(() => {});
     }
@@ -42,11 +39,13 @@ const Searchbar = ({
     if (searctText !== "") {
       const newContactList = filewithoutnpm?.datas?.filter((obj) => {
         let emailId = obj.Email;
+        let value=0
         if (emailId.startsWith(searctText)) {
-          return 1;
+          value=1
         }
+        return value;
       });
-      if (newContactList.length != 0) {
+      if (newContactList.length !== 0) {
         setShowEmail(() => {
           return {
             datas: newContactList,
@@ -61,7 +60,7 @@ const Searchbar = ({
     } else {
       setSearched(false);
     }
-  }, [searctText]);
+  }, [searctText,filewithoutnpm?.datas]);
   return (
     <>
       <div className="input-search input-search-wrapper ">

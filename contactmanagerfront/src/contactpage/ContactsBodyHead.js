@@ -1,13 +1,5 @@
 import React from "react";
 import "../App.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  solid,
-  regular,
-  brands,
-  icon,
-  thin,
-} from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
 import { TiArrowUnsorted } from "react-icons/ti";
 const ContactsBodyHead = ({
   showDeleteUI,
@@ -18,7 +10,7 @@ const ContactsBodyHead = ({
 }) => {
   return (
     <div className="data-wrapper body-header">
-      {filewithoutnpm?.datas?.length != 0 && header?.heading && (
+      {filewithoutnpm?.datas?.length !== 0 && header?.heading && (
         <div className="input-header">
           <input
             name="Deleteall"
@@ -31,9 +23,9 @@ const ContactsBodyHead = ({
         </div>
       )}
       <div className="content-overall-wrapper">
-        {filewithoutnpm?.datas?.length != 0 &&
+        {filewithoutnpm?.datas?.length !== 0 &&
           header?.heading?.map((ele, i) => {
-            if (ele != "Designation" && ele != "Company" && ele != "Industry") {
+            if (ele !== "Designation" && ele !=="Company" && ele !== "Industry") {
               return (
                 <div key={i} className={`${ele} common-header-styles`}>
                   {ele}
@@ -48,7 +40,7 @@ const ContactsBodyHead = ({
                   <>{ele}</>
                   <div
                     className={
-                      ele == "Designation" || ele == "Company"
+                      ele === "Designation" || ele === "Company"
                         ? "up-down-logo-container desig-company"
                         : "up-down-logo-container"
                     }
@@ -61,7 +53,7 @@ const ContactsBodyHead = ({
           })}
       </div>
       <div className="action-wrapper">
-        {filewithoutnpm?.datas?.length != 0 && header?.heading && (
+        {filewithoutnpm?.datas?.length !== 0 && header?.heading && (
           <div className="Action">Action</div>
         )}
       </div>
