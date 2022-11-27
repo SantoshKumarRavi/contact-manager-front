@@ -24,6 +24,7 @@ const Searchbar = ({filewithoutnpm,searchedEmails,setSearchedEmails,showImportUI
                 datas:[updatedArray[e_mail_index]]
             }})
             setSearched(false)
+            setSearchText("")
     }
         
     useEffect(()=>{

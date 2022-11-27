@@ -26,25 +26,30 @@ function ImportUI() {
   const [filewithoutnpm, setfilewithoutnpm] = useState({});
 const value=AuthConsumer()
 
-console.log("data from context",value.accesstoken)
+// console.log("data from context",value.accesstoken)
 
   useEffect(()=>{ // as of not requird for im not connecting db ..now css
+    // const userId=value?.userid   JSON.stringify({userId:value.userid}) 
+    // {console.log("value ",value,"user id",value.userid)}
     (async function getData() {
-      await fetch("http://localhost:8081/contacts", {
+      await fetch(`http://localhost:8081/contacts/${value.userid}`, {
           method: 'GET', 
           headers: {
             'Content-Type': 'application/json' 
           },
+          // body:value.userid
         }).then((x)=>x.json()).then((fetcheddata)=>{
            setfilewithoutnpm(()=>{
-        return {datas:fetcheddata.data} 
+        return {datas:fetcheddata.data}
         }
         )
         if(fetcheddata?.data?.length!=0){
+          fetcheddata.data.forEach(element => {
+                setDeleteTracking((prev)=>[...prev,{id:element._id,checked:false}])
+              });
           setheader(()=>{
           return ({heading:["Name","Designation","Company","Industry","Email","Phonenumber","Country"]})})
         }
-       
       }
       )
       })()
@@ -102,18 +107,23 @@ console.log("data from context",value.accesstoken)
     e.preventDefault();
     // console.log("drop handle cjhaming files [0]", e.dataTransfer.files[0]);
     const reader = new FileReader();
+      const userId=value.userid
     reader.onload = async ({ target }) => {
       const csv = Papa.parse(target.result, { header: true });
       const parsedData = csv?.data;
       const columns = Object.keys(parsedData[0]);
+     
       if(parsedData){
-        (async function postData() {
+        // {console.log("parse",parsedData)}
+       
+        {console.log("parse 2",parsedData)}
+        async function postData() {
         await fetch("http://localhost:8081/contacts", {
             method: 'POST', 
             headers: {
               'Content-Type': 'application/json' //REF: use for authentication
             },
-            body: JSON.stringify(parsedData) // body data type must match "Content-Type" header
+            body:JSON.stringify({data:parsedData,userId:userId}) // body data type must match "Content-Type" header
           }).then((x)=>x.json()).then((saveddata)=>{
           console.log("data posting and returd",saveddata.data)
           setheader(()=>{
@@ -121,10 +131,8 @@ console.log("data from context",value.accesstoken)
           setfilewithoutnpm((prev)=>{
             if(prev.datas==undefined){
               saveddata.data.forEach(element => {
-                console.log("ele ",element)
+                // console.log("ele ",element)
                 setDeleteTracking((prev)=>[...prev,{id:element._id,checked:false}])
-
-
               });
               return {datas:saveddata.data}
 
@@ -140,7 +148,8 @@ console.log("data from context",value.accesstoken)
           })
         
         })
-        })()
+        }
+        postData()
 
       }
       

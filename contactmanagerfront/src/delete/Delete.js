@@ -5,7 +5,10 @@ import AuthProvider from "../useauth/Useauth"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid, regular, brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
-function Appdelete({showDeleteUI,setshowDeleteUI,classname,deleteTracking,setheader,setDeleteTracking,setfilewithoutnpm,filewithoutnpm}) {
+function Appdelete({showDeleteUI,setshowDeleteUI,classname,deleteTracking,setheader,
+  setDeleteTracking,setfilewithoutnpm,
+  filewithoutnpm,searchedEmails,
+  setSearchedEmails}) {
   const showDeleteref_btn = useRef(null);
   const showDeleteref_content = useRef(null);
   const[contactDeleted,setContactDeleted]=useState(false)
@@ -79,9 +82,9 @@ function Appdelete({showDeleteUI,setshowDeleteUI,classname,deleteTracking,sethea
                 return 1
             }
         })
-          console.log("idhashobj",hashmap)
-          console.log("removd ",removed)
-          console.log("updatedAfterDelete ",updatedAfterDelete)
+          // console.log("idhashobj",hashmap)
+          // console.log("removd ",removed)
+          // console.log("updatedAfterDelete ",updatedAfterDelete)
           // setshowDeleteUI(false)
           setfilewithoutnpm({datas:updatedAfterDelete})
 
@@ -94,6 +97,7 @@ function Appdelete({showDeleteUI,setshowDeleteUI,classname,deleteTracking,sethea
           console.log("updatedDeletedtrackingIds ",updatedDeletedtrackingIds)
           setDeleteTracking(()=>[...updatedDeletedtrackingIds])
           setContactDeleted(true)
+          setSearchedEmails(()=>{})
         } )
   })()
   }

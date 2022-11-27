@@ -3,6 +3,11 @@ import ReactTooltip from 'react-tooltip';
 import "../App.css"
 const HoverOver = ({Email,Phonenumber}) => {
     const [isHovering, setIsHovering] = useState(false);
+    let emailabbre=Email
+    if(emailabbre.length>=16){
+      emailabbre=emailabbre.slice(0,13)+"..."
+    }
+    // {console.log("email abb",emailabbre,emailabbre.length,emailabbre.slice(0,13))}
     function handleMouseOver(){
         console.log("im hovered")
         setIsHovering(true)
@@ -25,7 +30,7 @@ const HoverOver = ({Email,Phonenumber}) => {
         data-text-color='rgb(0, 214, 252)'
         data-background-color="rgb(70, 98, 103)"
       >
-        {Email}
+        {emailabbre}
       </div>
       <div
         className={

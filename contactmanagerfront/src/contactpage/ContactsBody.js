@@ -14,8 +14,11 @@ import {GrEdit} from "react-icons/gr";
 import { VscTrash} from "react-icons/vsc";
 
 
-
 const ContactsBody = ({
+  page,
+  currentpage,
+  setfilewithoutnpm,
+  setDeleteTracking,
   showDeleteUI,
   showImportUI,
   filewithoutnpm,
@@ -24,11 +27,45 @@ const ContactsBody = ({
   deleteTracking,
   searchedEmails
 }) => {
-  
+  function deletebyicon(e){
+let tobedeletedIndex=parseInt(e?.target?.dataset?.svgindex)
+  {console.log("from del , del trackig",tobedeletedIndex)}
+  let idsArray=[deleteTracking[tobedeletedIndex]?.id]
+  {console.log("from del , del trackig",idsArray)}
+    (async function deleteData() {
+      tobedeletedIndex=parseInt(e.target?.dataset?.svgindex)
+    await fetch("http://localhost:8081/contacts", {
+        method: 'DELETE', 
+        headers: {
+          'Content-Type': 'application/json' 
+        },
+        body:JSON.stringify(idsArray)
+      }).then((x)=>x.json()).then((removed)=> {
+        let updatedAfterDelete=[...filewithoutnpm?.datas]
+        updatedAfterDelete=updatedAfterDelete.filter((ele,i)=>{
+          if(tobedeletedIndex!=i){
+              return 1
+          }
+         })
+        setfilewithoutnpm({datas:updatedAfterDelete})
+        let updatedDeletedtrackingIds=[...deleteTracking]
+        updatedDeletedtrackingIds=updatedDeletedtrackingIds.filter((ele,i)=>{
+          if(tobedeletedIndex!=i){
+            return 1
+        }
+        })
+        // console.log("updatedDeletedtrackingIds ",updatedDeletedtrackingIds)
+        setDeleteTracking(()=>[...updatedDeletedtrackingIds])
+        // setContactDeleted(true)
+      // } )
+      })
+})()
+
+  }
   return (
     <>
       {!searchedEmails?.datas?.length&&header?.heading &&
-        filewithoutnpm?.datas?.map((x, i) => {
+        filewithoutnpm?.datas?.slice((currentpage*9)-9,currentpage*9).map((x, i) => {
   
           // deletedArray?.push({id:x._id,checked:false})
           // setDeleteTracking((pre)=>[...pre,{id:x._id,checked:false}]) //here not working ;;err: too many renders
@@ -62,12 +99,8 @@ const ContactsBody = ({
               </div>
               <div className="action-wrapper">
               <div  className="Action content-action">
-              <FontAwesomeIcon
-                  icon={solid ("pencil")}
-                />
-                 <FontAwesomeIcon
-                  icon={solid ("trash-can")}
-                />
+                  <GrEdit/>
+                  <div onClick={(e)=>deletebyicon(e)}><VscTrash  data-svgindex={i}/></div>
           </div>
               </div>
             </div>
@@ -97,13 +130,22 @@ const ContactsBody = ({
                 <div className="Phonenumber  common-header-styles remove-border">{x.Phonenumber}</div>
                 <div className="Country  common-header-styles remove-border">{x.Country}</div>
                 </div>
+                {/* <div className="action-wrapper-body"> */}
+                {/* <div  className="Action content-action"> */}
+                  {/* <GrEdit/> */}
+                  {/* <div  className="t" onClick={()=>deletebyicon()}> */}
+                  {/* <VscTrash  /> */}
+                  {/* </div> */}
+                {/* </div> */}
+                {/* </div> */}
                 <div className="action-wrapper">
-                <div  className="Action content-action">
+              <div  className="Action content-action">
                   <GrEdit/>
-                
-                  <VscTrash/>
-                </div>
-                </div>
+                  <div onClick={(e)=>deletebyicon(e)}><VscTrash  data-svgindex={i}/></div>
+
+                  {/* <div onClick={(e)=>deletebyicon(e)}><VscTrash  data-svgindex={i}/></div> */}
+          </div>
+              </div>
               </div>
             );
 

@@ -53,6 +53,7 @@ const Login = () => {
           console.log("tooken from backend",res.data.jwt_token)
           value.setValue(res.data.jwt_token)
           value.setName(data.email)
+          value.setId(res.data.userid)
           navigate("/contact");
         }
       });

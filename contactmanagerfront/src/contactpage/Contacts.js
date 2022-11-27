@@ -17,10 +17,12 @@ import { AuthConsumer } from "../useauth/Useauth";
 import { MdOutlineDashboard,MdOutlineContacts ,MdOutlineImportExport,MdDeleteOutline } from "react-icons/md";
 import { BiFilter,BiExport,BiCalendar } from "react-icons/bi";
 import {FiChevronDown} from "react-icons/fi";
+import {IoIosArrowBack,IoIosArrowForward} from "react-icons/io";
 
 
 
-// username:username,
+
+// username:username,IoIosArrowBack
 // setName:(val)=>setUsername(()=>val)
 
 const Contacts = ({
@@ -39,6 +41,8 @@ const Contacts = ({
   logoutfunction,
 }) => {
   const [searchedEmails,setSearchedEmails]=useState({})
+  const[page,setPage]=useState({})
+  const[currentpage,setCurrentpage]=useState(1)
   const value=AuthConsumer()
   // console.log
 let user=value?.username?.split("@")[0].split("")
@@ -47,10 +51,43 @@ let user=value?.username?.split("@")[0].split("")
   user=firstletter+remaining
   
   useEffect(()=>{ //not working
-     if(user==undefined){
-      user="Hello user"
+    //  if(user==undefined){
+    //   user="Hello user"
+    // }
+    if(filewithoutnpm?.datas){
+    let filearray=[...filewithoutnpm?.datas]
+    if(filearray?.length>9){
+      let additional=parseInt(filearray?.length/9)
+      if(filearray.length%9!=0){
+        additional=additional+1
+      }
+      let pageArray=[]
+      for(let i=1;i<=additional;i++){
+        pageArray.push(i)
+      }
+      setPage(()=>{
+        return {
+          pages:pageArray
+        }
+      })
+
+    }else{
+      setPage(()=>{
+        return {
+          pages:[1]
+        }
+      })
     }
-  },[user])
+  }
+  let checkslice=(filewithoutnpm?.datas?.slice((currentpage*9)-9,currentpage*9))
+  // if(checkslice?.length==0 && currentpage!=1){
+  //   setCurrentpage((prev)=>prev-1)
+  // }
+  },[filewithoutnpm])
+  function changepages(e){
+    let pagenumber=(e.target.id)
+    setCurrentpage(()=>pagenumber)
+  }
   return (
     <>
       <div className="Contact-page-wrapper">
@@ -159,6 +196,8 @@ let user=value?.username?.split("@")[0].split("")
                   /> */}
                 <MdDeleteOutline  className="react-icon-common delete"/>
                     <Delete
+                    setSearchedEmails={setSearchedEmails}
+                    searchedEmails={searchedEmails}
                     showDeleteUI={showDeleteUI}
                     setshowDeleteUI={setshowDeleteUI}
                        classname={(showImportUI || showDeleteUI)?'common-styles-btn btn-before-glossy glossy-background':'common-styles-btn'}
@@ -210,6 +249,10 @@ let user=value?.username?.split("@")[0].split("")
                   header={header}
                 />
                 <ContactsBody 
+                page={page}
+                currentpage={currentpage}
+                setfilewithoutnpm={setfilewithoutnpm}
+                setDeleteTracking={setDeleteTracking}
                 showDeleteUI={showDeleteUI}
                   showImportUI={showImportUI}
                   searchedEmails={searchedEmails}
@@ -222,7 +265,15 @@ let user=value?.username?.split("@")[0].split("")
             </div>
           </div>
           <div className="pagination">
-
+              <div className="pagination-content-wrapper">
+                <IoIosArrowBack/>
+               {page?.pages?.length<=4 && page?.pages?.map((x,i)=><div id={x} onClick={(e)=>changepages(e)} className="page-number" key={i}>{x}</div>)
+               }
+               {page?.pages?.length>4 && page?.pages?.slice(0,4).map((x,i)=><div id={x} onClick={(e)=>changepages(e)} className="page-number" key={i}>{x}</div>)
+               }
+                {page?.pages?.length>4 &&<div>...</div>}
+                <IoIosArrowForward/>
+              </div>
           </div>
         </div>
       </div>
