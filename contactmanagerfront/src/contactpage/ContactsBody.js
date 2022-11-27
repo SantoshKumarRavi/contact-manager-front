@@ -59,12 +59,11 @@ const ContactsBody = ({
       }
     )();
   }
+
   function deletebyiconbysearch(e){
-    // console.log("clicked",e.target)
     
     let deleteid=searchedEmails?.datas[0]?._id
     let idsArray = [deleteid];
-    // {console.log("searched",idsArray)}
     (async function deleteData() {
       await fetch("http://localhost:8081/contacts", {
         method: "DELETE",
@@ -79,10 +78,7 @@ const ContactsBody = ({
           updatedAfterDelete = updatedAfterDelete.filter((ele, i) => {
             let value=0;
             if (ele._id !== deleteid) {
-              console.log("not ",ele._id , deleteid)
               value=1;
-            }else{
-              console.log("equal ",ele._id , deleteid)
             }
             return value;
           });
@@ -180,11 +176,28 @@ const ContactsBody = ({
                 <input
                   data-index={String(i)}
                   onChange={(e) => changeCheckbox(e)}
-                  id={x._id}
+                  data-searchdelid={searchedEmails?.datas[0]?._id}
                   type={"checkbox"}
-                  checked={deleteTracking[i]?.checked}
+                  // checked={deleteTracking[i]?.checked}
                 />
               </div>
+
+            
+              {/* 
+              let deleteid=searchedEmails?.datas[0]?._id
+    let idsArray = [deleteid];
+              
+              data-index={String(currentpage * 9 - 9 + i)}
+                    onChange={(e) => changeCheckbox(e)}
+                    id={x._id}
+                    type={"checkbox"}
+                    // style={{backgroundColor:"red"}}
+                    className={
+                      showImportUI || showDeleteUI ? "checkbox-background" : ""
+                    }
+                    // checked={deleteTracking[i]?.checked}
+                    checked={deleteTracking[currentpage * 9 - 9 + i]?.checked} */}
+          
               <div className="content-overall-wrapper ">
                 <div className="Name common-header-styles remove-border">
                   {x.Name}

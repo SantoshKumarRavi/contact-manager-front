@@ -189,7 +189,16 @@ function ImportUI() {
         return currentObj;
       });
       setDeleteTracking(() => updatedDeletedTracking);
-    } else {
+    } else if(e.target?.dataset?.searchdelid){
+      let searchedid=e.target?.dataset?.searchdelid
+      // console.log("search ==> ",e.target?.dataset?.searchdelid,deleteTracking)
+      let updatedDeletedTracking = [...deleteTracking];
+      for(let i=0;i<updatedDeletedTracking.length;i++){
+        if(updatedDeletedTracking[i].id===searchedid){
+          updatedDeletedTracking[i].checked=!updatedDeletedTracking[i].checked
+        }
+      }
+    } else{
       // setCheck(()=>!e.target.checked)
       let indexToBeUpdated = parseInt(e.target?.dataset?.index);
       let updatedDeletedTracking = [...deleteTracking];
@@ -197,6 +206,7 @@ function ImportUI() {
         ...updatedDeletedTracking[indexToBeUpdated],
         checked: !updatedDeletedTracking[indexToBeUpdated].checked,
       };
+      console.log("updated de",updatedDeletedTracking)
       setDeleteTracking(() => updatedDeletedTracking);
     }
   }
