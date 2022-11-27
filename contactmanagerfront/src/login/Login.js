@@ -41,7 +41,7 @@ const Login = () => {
         "content-type": "application/json",
       },
     };
-    axios.post("http://localhost:8081/login", data, config).then((res) => {
+    axios.post("https://contactmangerbackend.herokuapp.com/login", data, config).then((res) => {
       if (res.data.status !== "success") {
         seterrormsg(res.data.message);
         seterrcolor("red");

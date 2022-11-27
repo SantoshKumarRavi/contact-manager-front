@@ -28,7 +28,7 @@ function ImportUI() {
     // as of not requird for im not connecting db ..now css
 
     (async function getData() {
-      await fetch(`http://localhost:8081/contacts/${value.userid}`, {
+      await fetch(`https://contactmangerbackend.herokuapp.com/contacts/${value.userid}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -115,7 +115,7 @@ function ImportUI() {
 
       if (parsedData) {
         async function postData() {
-          await fetch("http://localhost:8081/contacts", {
+          await fetch("https://contactmangerbackend.herokuapp.com/contacts", {
             method: "POST",
             headers: {
               "Content-Type": "application/json", //REF: use for authentication

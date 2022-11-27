@@ -69,7 +69,7 @@ function Appdelete({
     });
 
     (async function deleteData() {
-      await fetch("http://localhost:8081/contacts", {
+      await fetch("https://contactmangerbackend.herokuapp.com/contacts", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

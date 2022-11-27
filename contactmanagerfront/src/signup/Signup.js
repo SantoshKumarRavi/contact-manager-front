@@ -48,7 +48,7 @@ const Signup = () => {
         "content-type": "application/json",
       },
     };
-    axios.post("http://localhost:8081/register", form, config).then((res) => {
+    axios.post("https://contactmangerbackend.herokuapp.com/register", form, config).then((res) => {
       popup();
       setMessage(res.data.message);
     });

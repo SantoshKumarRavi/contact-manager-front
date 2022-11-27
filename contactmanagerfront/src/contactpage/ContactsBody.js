@@ -24,7 +24,7 @@ const ContactsBody = ({
     let idsArray = [deleteTracking[tobedeletedIndex]?.id];
     (async function deleteData() {
         tobedeletedIndex = parseInt(e.target?.dataset?.svgindex);
-        await fetch("http://localhost:8081/contacts", {
+        await fetch("https://contactmangerbackend.herokuapp.com/contacts", {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -65,7 +65,7 @@ const ContactsBody = ({
     let deleteid=searchedEmails?.datas[0]?._id
     let idsArray = [deleteid];
     (async function deleteData() {
-      await fetch("http://localhost:8081/contacts", {
+      await fetch("https://contactmangerbackend.herokuapp.com/contacts", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
