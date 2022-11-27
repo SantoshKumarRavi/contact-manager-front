@@ -29,25 +29,25 @@ const value=AuthConsumer()
 console.log("data from context",value.accesstoken)
 
   useEffect(()=>{ // as of not requird for im not connecting db ..now css
-    (async function getData() {
-      await fetch("http://localhost:8081/contacts", {
-          method: 'GET', 
-          headers: {
-            'Content-Type': 'application/json' 
-          },
-        }).then((x)=>x.json()).then((fetcheddata)=>{
-           setfilewithoutnpm(()=>{
-        return {datas:fetcheddata.data} 
-        }
-        )
-        if(fetcheddata?.data?.length!=0){
+    // (async function getData() {
+      // await fetch("http://localhost:8081/contacts", {
+      //     method: 'GET', 
+      //     headers: {
+      //       'Content-Type': 'application/json' 
+      //     },
+      //   }).then((x)=>x.json()).then((fetcheddata)=>{
+      //      setfilewithoutnpm(()=>{
+      //   return {datas:fetcheddata.data} 
+      //   }
+      //   )
+        // if(fetcheddata?.data?.length!=0){
           setheader(()=>{
           return ({heading:["Name","Designation","Company","Industry","Email","Phonenumber","Country"]})})
-        }
+        // }
        
-      }
-      )
-      })()
+      // }
+      // )
+      // })()
   },[])
 
   useEffect(() => {
@@ -73,7 +73,7 @@ console.log("data from context",value.accesstoken)
  
 
   useEffect(async()=>{ //temp closed due to highlighting
-    // value.accesstoken="fdfdvf" // as of now
+    value.accesstoken="fdfdvf" // as of now
     if(value.accesstoken==""){
         console.log("it is empty acces demied") 
         navigate("/login")
@@ -106,43 +106,92 @@ console.log("data from context",value.accesstoken)
       const csv = Papa.parse(target.result, { header: true });
       const parsedData = csv?.data;
       const columns = Object.keys(parsedData[0]);
-      if(parsedData){
-        (async function postData() {
-        await fetch("http://localhost:8081/contacts", {
-            method: 'POST', 
-            headers: {
-              'Content-Type': 'application/json' //REF: use for authentication
-            },
-            body: JSON.stringify(parsedData) // body data type must match "Content-Type" header
-          }).then((x)=>x.json()).then((saveddata)=>{
-          console.log("data posting and returd",saveddata.data)
-          setheader(()=>{
-            return ({heading:columns})})
+      console.log(parsedData);
+      // if(parsedData){
+      //   (async function postData() {
+      //   await fetch("http://localhost:8081/contacts", {
+      //       method: 'POST', 
+      //       headers: {
+      //         'Content-Type': 'application/json' //REF: use for authentication
+      //       },
+      //       body: JSON.stringify(parsedData) // body data type must match "Content-Type" header
+      //     }).then((x)=>x.json()).then((saveddata)=>{
+      //     console.log("data posting and returd",saveddata.data)
+      //     setheader(()=>{
+      //       return ({heading:columns})})
+      //     setfilewithoutnpm((prev)=>{
+      //       if(prev.datas==undefined){
+      //         saveddata.data.forEach(element => {
+      //           console.log("ele ",element)
+      //           setDeleteTracking((prev)=>[...prev,{id:element._id,checked:false}])
+
+
+      //         });
+      //         return {datas:saveddata.data}
+
+      //       }else{
+      //         let updated=prev.datas
+      //         updated=[...updated,...saveddata.data]
+      //         saveddata.data.forEach(element => {
+      //           console.log("ele ",element)
+      //           setDeleteTracking((prev)=>[...prev,{id:element._id,checked:false}])
+      //         });
+      //         return {datas:updated}
+      //       }
+      //     })
+        
+      //   })
+      //   })()
+
+      // }
+
+      // ay(4)0: {Name: 'vijaymallaya', Designation: 'CEO',
+      //  Company: 'FreshWorks', Industry: 'IT', Email: 'mahesh@gmail.com'}, {Name: 'ajithkumar', Designation: 'Director', Company: 'Zoho', Industry: 'IT', Email: 'babu@gmail.com', …}2: {Name: 'suriya', Designation: 'Engineer', Company: 'Atlassian', Industry: 'IT', Email: 'rahul@gmail.com', …}3: {Name: 'mani', Designation: 'Front end Developer', Company: 'Zoho', Industry: 'IT', Email: 'mani@gmail.com', …}length: 4[[Prototype]]: Array(0)
+       const dummyArray=[{Company
+        : 
+        "FreshWorks",
+        Country
+        : 
+        "IND",
+        Designation
+        : 
+        "CEO",
+        Email
+        : 
+        "mallaya1@gmail.com",
+        Industry
+        : 
+        "IT",
+        Name
+        : 
+        "mallaya1",
+        Phonenumber
+        : 
+        "8428944115"},{Company: 
+          "FreshWorks",
+          Country
+          : 
+          "IND",
+          Designation
+          : 
+          "CEO",
+          Email
+          : 
+          "mallaya1@gmail.com",
+          Industry
+          : 
+          "IT",
+          Name
+          : 
+          "mallaya1",
+          Phonenumber
+          : 
+          "8428944115"}]
           setfilewithoutnpm((prev)=>{
-            if(prev.datas==undefined){
-              saveddata.data.forEach(element => {
-                console.log("ele ",element)
-                setDeleteTracking((prev)=>[...prev,{id:element._id,checked:false}])
-
-
-              });
-              return {datas:saveddata.data}
-
-            }else{
-              let updated=prev.datas
-              updated=[...updated,...saveddata.data]
-              saveddata.data.forEach(element => {
-                console.log("ele ",element)
-                setDeleteTracking((prev)=>[...prev,{id:element._id,checked:false}])
-              });
-              return {datas:updated}
+            return {
+              datas: dummyArray
             }
           })
-        
-        })
-        })()
-
-      }
       
       console.log("datas ", columns); //  heading as array of strings // may be used for customize column changing.. here we fixed the schema
       console.log("parsed data", parsedData); // data as array of objects

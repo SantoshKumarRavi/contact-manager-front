@@ -11,15 +11,15 @@ function App() {
   return (
     <Router >
        <Routes >
-             <Route
+             {/* <Route
                 exact
                 path="/"
                 element={<Navigate replace to="/signup" />}
-              />
-        <Route path="/signup" element={<Signup/>} />
-        <Route path="/login" element={
+              /> */}
+        {/* <Route path="/signup" element={<Signup/>} /> */}
+        {/* <Route path="/login" element={
           <AuthProvider> <Login/></AuthProvider>
-       } />
+       } /> */}
         <Route
           path="/contact" 
           element={
@@ -28,12 +28,12 @@ function App() {
             </AuthProvider>
           }
         />
-         <Route
+         {/* <Route
           path="*"
           element={
               <Signup/>
           }
-        />
+        /> */}
       </Routes>
     </Router>
   );

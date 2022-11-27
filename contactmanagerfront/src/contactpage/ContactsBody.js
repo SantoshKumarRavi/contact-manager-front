@@ -16,6 +16,7 @@ import { VscTrash} from "react-icons/vsc";
 
 
 const ContactsBody = ({
+  setfilewithoutnpm,
   showDeleteUI,
   showImportUI,
   filewithoutnpm,
@@ -24,15 +25,170 @@ const ContactsBody = ({
   deleteTracking,
   searchedEmails
 }) => {
+
+  const dummyArray=[{Company :"FreshWorks", Country : "IND",
+    Designation
+    : 
+    "CEO",
+    Email
+    : 
+    "mallaya1@gmail.com",
+    Industry
+    : 
+    "IT",
+    Name
+    : 
+    "mallaya1",
+    Phonenumber
+    : 
+    "8428944115"},{Company: 
+      "FreshWorks",
+      Country
+      : 
+      "IND",
+      Designation
+      : 
+      "CEO",
+      Email
+      : 
+      "mallaya1@gmail.com",
+      Industry
+      : 
+      "IT",
+      Name
+      : 
+      "mallaya1",
+      Phonenumber
+      : 
+      "8428944115"},{Company
+        : 
+        "FreshWorks",
+        Country
+        : 
+        "IND",
+        Designation
+        : 
+        "CEO",
+        Email
+        : 
+        "mallaya1@gmail.com",
+        Industry
+        : 
+        "IT",
+        Name
+        : 
+        "mallaya1",
+        Phonenumber
+        : 
+        "8428944115"},{Company: 
+          "FreshWorks",
+          Country
+          : 
+          "IND",
+          Designation
+          : 
+          "CEO",
+          Email
+          : 
+          "mallaya1@gmail.com",
+          Industry
+          : 
+          "IT",
+          Name
+          : 
+          "mallaya1",
+          Phonenumber
+          : 
+          "8428944115"},{Company :"FreshWorks", Country : "IND",
+          Designation
+          : 
+          "CEO",
+          Email
+          : 
+          "mallaya1@gmail.com",
+          Industry
+          : 
+          "IT",
+          Name
+          : 
+          "mallaya1",
+          Phonenumber
+          : 
+          "8428944115"},{Company: 
+            "FreshWorks",
+            Country
+            : 
+            "IND",
+            Designation
+            : 
+            "CEO",
+            Email
+            : 
+            "mallaya1@gmail.com",
+            Industry
+            : 
+            "IT",
+            Name
+            : 
+            "mallaya1",
+            Phonenumber
+            : 
+            "8428944115"},{Company
+              : 
+              "FreshWorks",
+              Country
+              : 
+              "IND",
+              Designation
+              : 
+              "CEO",
+              Email
+              : 
+              "mallaya1@gmail.com",
+              Industry
+              : 
+              "IT",
+              Name
+              : 
+              "mallaya1",
+              Phonenumber
+              : 
+              "8428944115"},{Company: 
+                "FreshWorks",
+                Country
+                : 
+                "IND",
+                Designation
+                : 
+                "CEO",
+                Email
+                : 
+                "mallaya1@gmail.com",
+                Industry
+                : 
+                "IT",
+                Name
+                : 
+                "mallaya1",
+                Phonenumber
+                : 
+                "8428944115"}]
+      // setfilewithoutnpm((prev)=>{
+      //   return {
+      //     datas: dummyArray
+      //   }
+      // })
+  
   
   return (
     <>
       {!searchedEmails?.datas?.length&&header?.heading &&
-        filewithoutnpm?.datas?.map((x, i) => {
+       dummyArray.map((x, i) => {
   
           // deletedArray?.push({id:x._id,checked:false})
           // setDeleteTracking((pre)=>[...pre,{id:x._id,checked:false}]) //here not working ;;err: too many renders
           return (
+            <div className="main-wrapper">
             <div className="data-wrapper" key={i}>
               <div className={showImportUI||showDeleteUI?"input-header":"input-header"}>
       
@@ -73,6 +229,7 @@ const ContactsBody = ({
           </div>
               </div>
             </div>
+            </div>
           );
         })}
 
@@ -80,6 +237,7 @@ const ContactsBody = ({
         {searchedEmails?.datas?.length&&header?.heading &&(
           searchedEmails?.datas?.map((x, i) => {
             return (
+              <div className="main-wrapper">
               <div className="data-wrapper" key={i}>
                 <div  className="input-header">
                 <input
@@ -107,15 +265,10 @@ const ContactsBody = ({
                 </div>
                 </div>
               </div>
+              </div>
             );
-
-
           })
-
-
         )
-
-
         }
     </>
   );

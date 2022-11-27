@@ -11,7 +11,7 @@ import {
 import {TiArrowUnsorted} from "react-icons/ti";
 const ContactsBodyHead = ({showDeleteUI,showImportUI, filewithoutnpm, header, changeCheckbox }) => {
   return (
-    <div className="data-wrapper body-header">
+    <div className="data-wrapper body-header all">
       {filewithoutnpm?.datas?.length !== 0 && header?.heading && (
         <div className="input-header">
           <input
