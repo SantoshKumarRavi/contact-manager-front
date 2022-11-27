@@ -8,15 +8,23 @@ import {
   icon,
   thin,
 } from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
-import {TiArrowUnsorted} from "react-icons/ti";
-const ContactsBodyHead = ({showDeleteUI,showImportUI, filewithoutnpm, header, changeCheckbox }) => {
+import { TiArrowUnsorted } from "react-icons/ti";
+const ContactsBodyHead = ({
+  showDeleteUI,
+  showImportUI,
+  filewithoutnpm,
+  header,
+  changeCheckbox,
+}) => {
   return (
     <div className="data-wrapper body-header">
       {filewithoutnpm?.datas?.length != 0 && header?.heading && (
         <div className="input-header">
           <input
             name="Deleteall"
-            className={showImportUI||showDeleteUI?"checkbox-background":""}
+            className={
+              showImportUI || showDeleteUI ? "checkbox-background" : ""
+            }
             onChange={(e) => changeCheckbox(e)}
             type={"checkbox"}
           />
@@ -38,9 +46,15 @@ const ContactsBodyHead = ({showDeleteUI,showImportUI, filewithoutnpm, header, ch
                   className={`${ele} common-header-styles logo-text-wrapper`}
                 >
                   <>{ele}</>
-                  <div  className={(ele=="Designation")||(ele=="Company")?'up-down-logo-container desig-company':"up-down-logo-container"}>
-                      <TiArrowUnsorted/>
-                   </div>
+                  <div
+                    className={
+                      ele == "Designation" || ele == "Company"
+                        ? "up-down-logo-container desig-company"
+                        : "up-down-logo-container"
+                    }
+                  >
+                    <TiArrowUnsorted />
+                  </div>
                 </div>
               );
             }
