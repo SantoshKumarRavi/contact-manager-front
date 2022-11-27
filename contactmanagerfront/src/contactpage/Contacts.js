@@ -287,6 +287,7 @@ const Contacts = ({
                   header={header}
                 />
                 <ContactsBody
+                  setSearchedEmails={setSearchedEmails}
                   page={page}
                   currentpage={currentpage}
                   setfilewithoutnpm={setfilewithoutnpm}

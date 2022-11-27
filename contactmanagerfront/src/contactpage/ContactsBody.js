@@ -6,6 +6,7 @@ import { GrEdit } from "react-icons/gr";
 import { VscTrash } from "react-icons/vsc";
 
 const ContactsBody = ({
+  setSearchedEmails,
   page,
   currentpage,
   setfilewithoutnpm,
@@ -20,7 +21,6 @@ const ContactsBody = ({
 }) => {
   function deletebyicon(e) {
     let tobedeletedIndex = parseInt(e?.target?.dataset?.svgindex);
-
     let idsArray = [deleteTracking[tobedeletedIndex]?.id];
     (async function deleteData() {
         tobedeletedIndex = parseInt(e.target?.dataset?.svgindex);
@@ -58,6 +58,52 @@ const ContactsBody = ({
           });
       }
     )();
+  }
+  function deletebyiconbysearch(e){
+    // console.log("clicked",e.target)
+    
+    let deleteid=searchedEmails?.datas[0]?._id
+    let idsArray = [deleteid];
+    // {console.log("searched",idsArray)}
+    (async function deleteData() {
+      await fetch("http://localhost:8081/contacts", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(idsArray),
+      })
+        .then((x) => x.json())
+        .then((removed) => {
+          let updatedAfterDelete = [...filewithoutnpm?.datas];
+          updatedAfterDelete = updatedAfterDelete.filter((ele, i) => {
+            let value=0;
+            if (ele._id !== deleteid) {
+              console.log("not ",ele._id , deleteid)
+              value=1;
+            }else{
+              console.log("equal ",ele._id , deleteid)
+            }
+            return value;
+          });
+          setfilewithoutnpm({ datas: updatedAfterDelete });
+          let updatedDeletedtrackingIds = [...deleteTracking];
+          updatedDeletedtrackingIds = updatedDeletedtrackingIds.filter(
+            (ele, i) => {
+              let value=0
+              if (ele._id !== deleteid) {
+                value=1
+              }
+              return value;
+            }
+          );
+          setDeleteTracking(() => [...updatedDeletedtrackingIds]);
+          setSearchedEmails(()=>{})
+        });
+    }
+  )();
+
+
   }
   return (
     <>
@@ -173,8 +219,8 @@ const ContactsBody = ({
               <div className="action-wrapper">
                 <div className="Action content-action">
                   <GrEdit />
-                  <div onClick={(e) => deletebyicon(e)}>
-                    <VscTrash data-svgindex={currentpage * 9 - 9 + i} />
+                  <div onClick={(e) => deletebyiconbysearch(e)}>
+                    <VscTrash />
                   </div>
 
                   {/* <div onClick={(e)=>deletebyicon(e)}><VscTrash  data-svgindex={i}/></div> */}

@@ -25,7 +25,7 @@ const Searchbar = ({
   };
   function showSearchedEmailData(e) {
     let e_mail_index = e.target.id;
-    let updatedArray = [...showEmail.datas];
+    let updatedArray = [...showEmail?.datas];
     setSearchedEmails(() => {
       return {
         datas: [updatedArray[e_mail_index]],
