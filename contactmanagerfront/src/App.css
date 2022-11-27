@@ -216,9 +216,9 @@ display: flex;
 justify-content: center;
 align-items: center;
 }
-.del-logo{
+/* .del-logo{
 /* background-color: tomato; */
-}
+/* }  */
 
 .delete-text-wrapper{
   width: 162px;
@@ -374,7 +374,18 @@ color: #1F2633;
   height: 50%;
   /* justify-content: space-around; */
   align-items: center;
+
 }
+.child-aside1{
+  display: flex;
+  width: 80%;
+  height: 50%;
+  /* justify-content: space-around; */
+  align-items: center;
+  background-color: #2DA5FC;
+
+}
+
 .main-logo{
   width: 83px;
   height: 61px;
@@ -429,12 +440,36 @@ margin-left: 5px;
   flex-direction: row;
   width: 100%;
   height: 10%;
+  padding: 5px;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 20px 0px #0000001A;
+  border: none;
+  font-size: 14px;
+  border-radius: 10px;
+  margin-right: 10px;
 }
 .header{
-  width: 50%;
+    width: 100px;
+    /* Font:Titillium Web; */
+    /* Weight:600; */
+    /* Size:32px; */
+
+color: #454545;
+font-family: Titillium Web;
+font-size:14px;
+font-style: SemiBold;
 }
+
+.btn:hover{
+    cursor: pointer;
+    background-color: #e7e7e7;
+    transition: 0.3s;
+}
+
+  /* width: 50%;
+} */
 .search-wrapper{
-  width: 50%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -449,9 +484,9 @@ margin-left: 5px;
 }
 .usersdetails-container{
   width: 40%;
-  display: flex;
+  /* display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: center; */
 }
 .search-bar{
   width: 90%;
@@ -459,9 +494,16 @@ margin-left: 5px;
   height: 50%;
 }
 .input-search{
-  width: 100%;
+  width: 75%;
   height: 100%;
+  margin-left: 40%;
   outline: none;
+  background-color: #F5F5F5;
+  border:none;
+  /* margin-left:70% */
+}
+.input-search:hover{
+  background-color:white;
 }
 .logo-data-wrapper{
   width: 70%;
@@ -471,11 +513,13 @@ margin-left: 5px;
 }
 .input-search-wrapper{
   position: relative;
+  background-color: white;
+
 }
 .fontaw-mag-glass{
   position: absolute;
-  top: 5px;
-  left: 10px;
+  top: 8px;
+  left: 170px;
 }
 .input-search-content{
   box-sizing: border-box;
@@ -489,17 +533,37 @@ margin-left: 5px;
   width: 100%;
   height: 100%;
   border-radius: 50px;
+  margin-left: 170%;
 
 }
 
 .data-container{
   width: 70%;
   height: 100%;
-  justify-content: center;
+  margin-left: 25%;
+  justify-content: right;
   align-items: center;
   display: flex;
+  /* margin-left: 105%; */
   flex-direction: column;
+  /* margin-left: 170%; */
 
+}
+.btn {
+  width: 100px;
+  padding: 5px;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 20px 0px #0000001A;
+  border: none;
+  font-size: 14px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+.btn:hover{
+  cursor: pointer;
+  background-color: #e7e7e7;
+  transition: 0.3s;
 }
 
 .main-content-wrapper{
@@ -508,6 +572,8 @@ margin-left: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: 
+  #FBFBFB;
 }
 
 .main-body-content-wrapper{
@@ -537,11 +603,19 @@ margin-left: 5px;
   width: 25%;
 }
 .date-container{
-  width: 50%;
+  width: 60%;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 60%;
+  height: 40%;
+  /* width: 100px; */
+  padding: 5px;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 20px 0px #0000001A;
+  border: none;
+  font-size: 13px;
+  border-radius: 10px;
+  margin-right: 10px;
 }
 .react-icon-common{
   width: 20%;
@@ -559,7 +633,15 @@ margin-left: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 60%;
+  height: 40%;
+  width: 100px;
+  padding: 5px;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 20px 0px #0000001A;
+  border: none;
+  font-size: 14px;
+  border-radius: 10px;
+  margin-right: 10px;
 }
 .import-export-container{
   display: flex;
@@ -571,19 +653,43 @@ margin-left: 5px;
 
   width: 100%;
   height: 100%;
+  width: 100px;
+  padding: 5px;
+  background-color: #FFFFFF;
+  /* box-shadow: 1px 5px 20px 0px #0000001A; */
+  border: none;
+  font-size: 14px;
+  border-radius: 10px;
+  margin-right: 10px;
 }
 .common-btn-container{
   display: flex;
   width: 25%;
-  height: 50%;
+  height: 40%;
   justify-content: center;
   align-items: center;
+  width: 100px;
+  padding: 5px;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 20px 0px #0000001A;
+  border: none;
+  font-size: 14px;
+  border-radius: 10px;
+  margin-right: 10px;
 }
 .dates-filter{
   padding: 0%;
   margin: 0%;
-  width: 70%;
-  height: 75%;
+  /* width: 70%;
+  height: 75%; */
+  width: 100px;
+  padding: 5px;
+  background-color: #FFFFFF;
+  /* box-shadow: 1px 5px 20px 0px #0000001A; */
+  border: none;
+  font-size: 13px;
+  /* border-radius: 10px; */
+  margin-right: 10px;
 }
 
 .data-wrapper{
@@ -592,15 +698,47 @@ margin-left: 5px;
   width: 100%;
   height: 10%;
 }
-.body-header{
-}
+/* .body-header{
+} */
 .content-overall-wrapper{
 /* height: 100%; */
 width:90% ;
 display: flex;
 justify-content: center;
 align-items: center;
+
+
 }
+/* th {
+  background-color: rgba(178, 223, 255, 1);
+  font-weight: 600px;
+  font-size: 17px;
+  position: sticky;
+  top: 0;
+  padding-inline: 20px;
+}
+
+tr {
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(251, 251, 251, 1);
+}
+
+tr:nth-child(odd) {
+  background-color: rgba(178, 223, 255, 0.31);
+
+}
+td:first-child,
+th:first-child{
+  border-radius: 10px 0 0px 10px;
+}
+
+th:last-child{
+  border-radius: 0px 10px 10px 0px;
+} */
+
 
 .input-header{
   display: flex;
@@ -612,6 +750,7 @@ align-items: center;
   text-align: left;
   border-right: 1px solid black;
   padding-left: 4px;
+
 }
 
 .remove-border{
@@ -710,17 +849,18 @@ margin-left: 25%;
   width: 100%;
   height: 60%;
 border-right: 3px solid black;
+/* background-color: #0884FF; */
 }
 .dash-text-total{
   width: 100%;
   height: 80%;
 }
 .email-searched-content{
-  /* background-color: tomato; */
   height: 30px;
   z-index: 10;
   text-align: left;
   padding-left: 30px;
+  background-color: white;
 }
 .search-email-wrapper{
   display: flex;
@@ -730,10 +870,12 @@ border-right: 3px solid black;
   position: relative;
 }
 .btn-before-glossy{
-  background-color: #FFFFFF;
-  border: 1px solid #FFFFFF;
+  /* background-color: #FFFFFF;
+  border: 1px solid #FFFFFF; */
   padding: 0%;
   margin: 0%;
+  border: none;
+    background: transparent;
 }
 
 .glossy-background {

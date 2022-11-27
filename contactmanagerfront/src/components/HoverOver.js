@@ -22,8 +22,8 @@ const HoverOver = ({Email,Phonenumber}) => {
         onMouseOut={handleMouseOut}
         data-for="tool"
         data-tip={Email}
-        data-text-color='rgb(0, 214, 252)'
-        data-background-color="rgb(70, 98, 103)"
+        data-text-color='black'
+        data-background-color="white"
       >
         {Email}
       </div>

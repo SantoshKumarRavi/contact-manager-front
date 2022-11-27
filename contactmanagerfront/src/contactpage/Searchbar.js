@@ -1,6 +1,8 @@
 import React ,{useEffect, useState} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid, regular, brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
+import Appdelete from '../delete/Delete'
+import '../App.css';
 const Searchbar = ({filewithoutnpm,searchedEmails,setSearchedEmails,showImportUI,showDeleteUI}) => {
     const [searctText, setSearchText] = useState("")
     const [issearched,setSearched]=useState(false)
@@ -10,7 +12,7 @@ const Searchbar = ({filewithoutnpm,searchedEmails,setSearchedEmails,showImportUI
         // {_id: '637e091f6a0c229c73f2103e', name: 'Shantosh', email: 'shantosh@gmail.com'}
         let search = (e.target.value)
         setSearchText(search)
-        if(search==""){
+        if(search===""){
             setSearched(false)
             setSearchedEmails(()=>{})
         }
@@ -36,7 +38,7 @@ const Searchbar = ({filewithoutnpm,searchedEmails,setSearchedEmails,showImportUI
               }
             })
             console.log("new contact", searctText,newContactList)
-            if(newContactList.length!=0){
+            if(newContactList.length!==0){
                 setShowEmail(() => {
                     return {
                       datas: newContactList
@@ -56,7 +58,7 @@ const Searchbar = ({filewithoutnpm,searchedEmails,setSearchedEmails,showImportUI
   return (
     <>
     <div className='input-search input-search-wrapper '>
-    <FontAwesomeIcon className='fontaw-mag-glass'   icon={solid('magnifying-glass')}/>
+    <FontAwesomeIcon className='fontaw-mag-glass'   icon={solid('magnifying-glass')} />
       <input
         type="text"
         className={(showImportUI||showDeleteUI) ?'input-search input-search-content glossy-background':"input-search input-search-content"}
@@ -64,7 +66,7 @@ const Searchbar = ({filewithoutnpm,searchedEmails,setSearchedEmails,showImportUI
         // className='input-search input-search-content'
         placeholder="Search contacts"
         value={searctText}
-        onChange={searchHandler}
+        onChange={searchHandler} 
       />
       </div>
       

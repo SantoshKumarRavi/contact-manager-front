@@ -67,7 +67,7 @@ let user=value?.username?.split("@")[0].split("")
                   <MdOutlineDashboard className="dash"/>
                 <p className="dash-text">Dashboard</p>
               </div>
-              <div className="child-aside ">
+              <div className="child-aside1 ">
                 {/* <FontAwesomeIcon
                   className="fontaw-contacts-icon"
                   icon={regular("id-badge")}
@@ -128,7 +128,7 @@ let user=value?.username?.split("@")[0].split("")
                 <BiCalendar className="react-icon-common"/>
 
                   {/* <Button classname={`common-styles-btn dates-filter`} value={"Select Date"} /> */}
-                <Button  classname={(showImportUI || showDeleteUI)?'common-styles-btn dates-filter btn-before-glossy glossy-background':'common-styles-btn dates-filter'}
+                <Button  classname={(showImportUI || showDeleteUI)?'common-styles-btn dates-filter btn btn-before-glossy glossy-background':'common-styles-btn dates-filter'}
                  value={"Select Date"} />
                   {/* <FontAwesomeIcon
                   icon={solid ("chevron-down")}
@@ -142,7 +142,7 @@ let user=value?.username?.split("@")[0].split("")
                 /> */}
                       <BiFilter  className="react-icon-common" />
                
-                  <Button   classname={(showImportUI || showDeleteUI)?'common-styles-btn dates-filter btn-before-glossy glossy-background':'common-styles-btn dates-filter'}
+                  <Button   classname={(showImportUI || showDeleteUI)?'common-styles-btn btn dates-filter btn-before-glossy glossy-background':'common-styles-btn dates-filter'}
                    value={"Filters"} />
                   {/* <FontAwesomeIcon
                   icon={solid ("chevron-down")}

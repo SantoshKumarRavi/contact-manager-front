@@ -53,8 +53,8 @@ const ContactsBody = ({
               <div className="Company  common-header-styles remove-border glossy-background">{x.Company}</div>
               <div className="Industry  common-header-styles remove-border glossy-background">{x.Industry}</div>
               <HoverOver Email={x.Email} Phonenumber={x.Phonenumber} />
-              {/* <ReactTooltip  place='bottom' id='tool'/> */}
-              {/* <div className="Email  common-header-styles remove-border glossy-background tip" 
+              {/* <ReactTooltip  place='bottom' id='tool'/> */} 
+              {/* {/* <div className="Email  common-header-styles remove-border glossy-background tip" 
               onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} data-for='tool' data-tip={x.Email}
               >{x.Email}</div> */}
               {/* <div className={isHovering?'blue Phonenumber  common-header-styles remove-border glossy-background':"Phonenumber  common-header-styles remove-border glossy-background"}>{x.Phonenumber}</div> */}
@@ -63,10 +63,12 @@ const ContactsBody = ({
               <div className="action-wrapper">
               <div  className="Action content-action">
               <FontAwesomeIcon
+              style={{ color: "rgb(0,181,226)" }}
                   icon={solid ("pencil")}
                 />
                  <FontAwesomeIcon
                   icon={solid ("trash-can")}
+                  style={{ color: "red" }}
                 />
           </div>
               </div>
