@@ -18,6 +18,10 @@
         "react-scripts": "4.0.0",
         "react-tooltip": "^4.5.1"
     },
+    "engines": {
+        "node": "16.17.0",
+        "npm":"7.17.0"
+      },
     "scripts": {
         "start": "react-scripts --openssl-legacy-provider start",
         "build": "react-scripts build",
