@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useRef} from "react";
 import ContactsBodyHead from "./ContactsBodyHead";
 import ContactsBody from "./ContactsBody";
 import Delete from "../delete/Delete";
@@ -7,8 +7,8 @@ import Searchbar from "./Searchbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   solid
-} from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
-import "../App.css"; //GrEdit
+} from "@fortawesome/fontawesome-svg-core/import.macro";
+import "../App.css";
 import { AuthConsumer } from "../useauth/Useauth";
 import {
   MdOutlineDashboard,
@@ -20,8 +20,6 @@ import { BiFilter, BiExport, BiCalendar } from "react-icons/bi";
 import { FiChevronDown } from "react-icons/fi";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-// username:username,IoIosArrowBack
-// setName:(val)=>setUsername(()=>val)
 
 const Contacts = ({
   showImportUI,
@@ -46,12 +44,11 @@ const Contacts = ({
   let firstletter = user[0]?.toUpperCase();
   let remaining = user?.slice(1).join("");
   user = firstletter + remaining;
+  const showDeleteref_btn = useRef(null);
+
 
   useEffect(() => {
-    //not working
-    //  if(user==undefined){
-    //   user="Hello user"
-    // }
+   
     if (filewithoutnpm?.datas) {
       let filearray = [...filewithoutnpm?.datas];
       if (filearray?.length > 9) {
@@ -88,10 +85,14 @@ const Contacts = ({
     let pagenumber = e.target.id;
     setCurrentpage(() => pagenumber);
   }
+  function updateshowDeleteUI() {
+    setshowDeleteUI((prev) => !prev);
+  }
+
   return (
     <>
       <div className="Contact-page-wrapper">
-        <div className="aside-wrapper">
+        <div className={showImportUI || showDeleteUI?`aside-wrapper common-opacity`:"aside-wrapper"}>
           <div className="aside-logo-container">
             <div className="logo-container">
               <div className="main-logo">
@@ -100,15 +101,11 @@ const Contacts = ({
             </div>
             <div className="aside-contact-header">
               <div className="child-aside">
-                {/* <img alt="dash-icon" className="img-dash" src={"dash.png"} /> */}
                 <MdOutlineDashboard className="dash" />
-                <p className="dash-text">Dashboard</p>
+                <p className="dashboard-text">Dashboard</p>
               </div>
-              <div className="child-aside ">
-                {/* <FontAwesomeIcon
-                  className="fontaw-contacts-icon"
-                  icon={regular("id-badge")}
-                /> */}
+              <div className="child-aside child-total-contacts">
+               
                 <MdOutlineContacts className="total-contacts" />
                 <div className="dash-text-border">
                   <div className="dash-text dash-text-total ">
@@ -124,8 +121,8 @@ const Contacts = ({
               <button
                 className={
                   showImportUI || showDeleteUI
-                    ? "btn-before-glossy glossy-background"
-                    : "btn-before-glossy"
+                    ? "btn-before-glossy glossy-background logout-bottom"
+                    : "btn-before-glossy logout-bottom"
                 }
                 onClick={() => logoutfunction()}
               >
@@ -137,7 +134,7 @@ const Contacts = ({
         <div className="main-page-wrapper">
           <div className="header-wrapper">
             <div className="header">
-              <p>Total contacts</p>
+              <p className="para-total-contact" >Total contacts</p>
             </div>
             <div className="search-wrapper">
               <div className="search-bar-wrapper">
@@ -159,7 +156,6 @@ const Contacts = ({
                       className={
                         showImportUI || showDeleteUI ? "glossy-image" : ""
                       }
-                      // className=""
                       src={"user.png"}
                     />
                   </div>
@@ -175,84 +171,74 @@ const Contacts = ({
             <div className="main-body-content-wrapper">
               <div className="header-btn-wrapper">
                 <div className="filtered-container">
-                  <div className="date-container">
-                    {/* <FontAwesomeIcon
-                  icon={regular ("calendar-days")}
-                /> */}
-                    <BiCalendar className="react-icon-common" />
+                  <div className={showImportUI || showDeleteUI?`date-container common-opacity`:"date-container"}>
+                    
+                    <BiCalendar className="react-icon-common react-icons-left" />
 
-                    {/* <Button classname={`common-styles-btn dates-filter`} value={"Select Date"} /> */}
                     <Button
                       classname={
                         showImportUI || showDeleteUI
-                          ? "common-styles-btn dates-filter btn-before-glossy glossy-background"
-                          : "common-styles-btn dates-filter"
+                          ? "common-styles-btn dates-filter btn-before-glossy glossy-background common-opacity-text-color-btns"
+                          : "common-styles-btn dates-filter common-opacity-text-color-btns"
                       }
                       value={"Select Date"}
                     />
-                    {/* <FontAwesomeIcon
-                  icon={solid ("chevron-down")}
-                /> */}
-                    <FiChevronDown className="react-icon-common" />
+                    <FiChevronDown className="react-icon-common arrow-down-icon" />
                   </div>
-                  <div className="filter-details-wrapper">
-                    {/* <FontAwesomeIcon
-                  icon={solid ("arrow-down-wide-short")}
-                /> */}
-                    <BiFilter className="react-icon-common" />
+                  <div  className={showImportUI || showDeleteUI?`filter-details-wrapper common-opacity`:"filter-details-wrapper"}>
+                
+                    <BiFilter className="react-icon-common filter-icon react-icons-left" />
 
                     <Button
                       classname={
                         showImportUI || showDeleteUI
-                          ? "common-styles-btn dates-filter btn-before-glossy glossy-background"
-                          : "common-styles-btn dates-filter"
+                          ? "common-styles-btn dates-filter btn-before-glossy glossy-background common-opacity-text-color-btns"
+                          : "common-styles-btn dates-filter common-opacity-text-color-btns"
                       }
-                      value={"Filters"}
+                      value={"Filters   |"}
                     />
-                    {/* <FontAwesomeIcon
-                  icon={solid ("chevron-down")}
-                /> */}
-                    <FiChevronDown className="react-icon-common" />
+                   
+                    <FiChevronDown className="react-icon-common arrow-down-icon" />
                   </div>
                 </div>
                 <div className="import-export-container">
-                  <div className="common-btn-container">
-                    {/* <FontAwesomeIcon
-                    className="fontaw-tick"
-                    icon={solid("trash-can")}
-                  /> */}
-                    <MdDeleteOutline className="react-icon-common delete" />
-                    <Delete
+                
+                  <div className={showImportUI || showDeleteUI?`common-btn-container common-opacity`:"common-btn-container"}>
+                   
+                    <MdDeleteOutline className="react-icon-common react-icons-right delete" />
+                    <Button
+                        showUI={showDeleteUI}
+                        classname={
+                          showImportUI || showDeleteUI
+                            ? "common-styles-btn btn-before-glossy glossy-background common-opacity-text-color-btns"
+                            : "common-styles-btn common-opacity-text-color-btns"
+                        }
+                        showref={showDeleteref_btn}
+                        functionality={updateshowDeleteUI}
+                        value={"Delete"}
+                      />
+                  </div>
+                  {showDeleteUI &&(<Delete
                       setSearchedEmails={setSearchedEmails}
                       searchedEmails={searchedEmails}
                       showDeleteUI={showDeleteUI}
                       setshowDeleteUI={setshowDeleteUI}
-                      classname={
-                        showImportUI || showDeleteUI
-                          ? "common-styles-btn btn-before-glossy glossy-background"
-                          : "common-styles-btn"
-                      }
+                      showDeleteref_btn={showDeleteref_btn}
                       setheader={setheader}
                       setDeleteTracking={setDeleteTracking}
                       deleteTracking={deleteTracking}
                       filewithoutnpm={filewithoutnpm}
                       setfilewithoutnpm={setfilewithoutnpm}
-                    />
-                  </div>
+                    />)}
 
-                  <div className="common-btn-container">
-                    {/* <FontAwesomeIcon
-                    icon={solid("arrow-up")}
-                  />
-                   <FontAwesomeIcon
-                    icon={solid("arrow-down")}
-                  /> */}
-                    <MdOutlineImportExport className="react-icon-common delete" />
+                  <div className={showImportUI || showDeleteUI?`common-btn-container common-opacity`:"common-btn-container"}>
+                    
+                    <MdOutlineImportExport className="react-icon-common react-icons-right delete" />
                     <Button
                       classname={
                         showImportUI || showDeleteUI
-                          ? "common-styles-btn import-btn btn-before-glossy glossy-background"
-                          : "common-styles-btn import-btn"
+                          ? "common-styles-btn import-btn btn-before-glossy glossy-background common-opacity-text-color-btns"
+                          : "common-styles-btn import-btn common-opacity-text-color-btns"
                       }
                       showUI={showImportUI}
                       showref={showUIref_btn}
@@ -261,17 +247,15 @@ const Contacts = ({
                     />
                   </div>
 
-                  <div className="common-btn-container">
-                    {/* <FontAwesomeIcon
-                    icon={solid("arrow-up-from-bracket")}
-                  /> */}
-                    <BiExport className="react-icon-common delete" />
+                  <div className={showImportUI || showDeleteUI?`common-btn-container common-opacity`:"common-btn-container"}>
+                    
+                    <BiExport className="react-icon-common react-icons-right delete" />
 
                     <Button
                       classname={
                         showImportUI || showDeleteUI
-                          ? "common-styles-btn btn-before-glossy glossy-background"
-                          : "common-styles-btn"
+                          ? "common-styles-btn btn-before-glossy glossy-background common-opacity-text-color-btns"
+                          : "common-styles-btn common-opacity-text-color-btns"
                       }
                       value={"Export"}
                     />
@@ -279,39 +263,44 @@ const Contacts = ({
                 </div>
               </div>
               <div className="contacts-wrapper">
-                <ContactsBodyHead
-                  showDeleteUI={showDeleteUI}
-                  showImportUI={showImportUI}
-                  changeCheckbox={changeCheckbox}
-                  filewithoutnpm={filewithoutnpm}
-                  header={header}
-                />
+              
+                {filewithoutnpm?.datas?.length!==0 &&(
+                       <ContactsBodyHead
+                       showDeleteUI={showDeleteUI}
+                       showImportUI={showImportUI}
+                       changeCheckbox={changeCheckbox}
+                       filewithoutnpm={filewithoutnpm}
+                       header={header}
+                     />   
+                )
+                }
                 <ContactsBody
-                  setSearchedEmails={setSearchedEmails}
-                  page={page}
-                  currentpage={currentpage}
-                  setfilewithoutnpm={setfilewithoutnpm}
-                  setDeleteTracking={setDeleteTracking}
-                  showDeleteUI={showDeleteUI}
-                  showImportUI={showImportUI}
-                  searchedEmails={searchedEmails}
-                  deleteTracking={deleteTracking}
-                  changeCheckbox={changeCheckbox}
-                  filewithoutnpm={filewithoutnpm}
-                  header={header}
-                />
+                        setSearchedEmails={setSearchedEmails}
+                        page={page}
+                        currentpage={currentpage}
+                        setfilewithoutnpm={setfilewithoutnpm}
+                        setDeleteTracking={setDeleteTracking}
+                        showDeleteUI={showDeleteUI}
+                        showImportUI={showImportUI}
+                        searchedEmails={searchedEmails}
+                        deleteTracking={deleteTracking}
+                        changeCheckbox={changeCheckbox}
+                        filewithoutnpm={filewithoutnpm}
+                        header={header}
+                      />
+              
               </div>
             </div>
           </div>
-          <div className="pagination">
+          <div className={showImportUI || showDeleteUI?`pagination common-opacity opacity-pagination`:"pagination"}>
             <div className="pagination-content-wrapper">
-              <IoIosArrowBack />
+              <IoIosArrowBack className="pagination-arrow" />
               {page?.pages?.length <= 4 &&
                 page?.pages?.map((x, i) => (
                   <div
                     id={x}
                     onClick={(e) => changepages(e)}
-                    className="page-number"
+                    className={currentpage===x?"page-number currentpage":"page-number non-currentpage"}
                     key={i}
                   >
                     {x}
@@ -329,7 +318,7 @@ const Contacts = ({
                   </div>
                 ))}
               {page?.pages?.length > 4 && <div>...</div>}
-              <IoIosArrowForward />
+              <IoIosArrowForward className="pagination-arrow"/>
             </div>
           </div>
         </div>

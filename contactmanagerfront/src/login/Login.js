@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import "../App2.css"
 import "./Login.css";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import axios from "axios";

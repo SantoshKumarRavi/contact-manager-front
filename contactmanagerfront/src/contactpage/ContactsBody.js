@@ -1,9 +1,9 @@
 import React from "react";
 import "../App.css";
-// import ReactTooltip from 'react-tooltip'; VscTrash
 import HoverOver from "../components/HoverOver";
-import { GrEdit } from "react-icons/gr";
 import { VscTrash } from "react-icons/vsc";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {solid} from "@fortawesome/fontawesome-svg-core/import.macro"; 
 
 const ContactsBody = ({
   setSearchedEmails,
@@ -53,8 +53,7 @@ const ContactsBody = ({
               }
             );
             setDeleteTracking(() => [...updatedDeletedtrackingIds]);
-            // setContactDeleted(true)
-            // } )
+          
           });
       }
     )();
@@ -108,10 +107,8 @@ const ContactsBody = ({
         filewithoutnpm?.datas
           ?.slice(currentpage * 9 - 9, currentpage * 9)
           .map((x, i) => {
-            // deletedArray?.push({id:x._id,checked:false})
-            // setDeleteTracking((pre)=>[...pre,{id:x._id,checked:false}]) //here not working ;;err: too many renders
             return (
-              <div className="data-wrapper" key={i}>
+              <div className={(i%2!==0)?"data-wrapper common-inside-text-color alternate-color":"data-wrapper common-inside-text-color"} key={i}>
                 <div
                   className={
                     showImportUI || showDeleteUI
@@ -124,11 +121,9 @@ const ContactsBody = ({
                     onChange={(e) => changeCheckbox(e)}
                     id={x._id}
                     type={"checkbox"}
-                    // style={{backgroundColor:"red"}}
                     className={
                       showImportUI || showDeleteUI ? "checkbox-background" : ""
                     }
-                    // checked={deleteTracking[i]?.checked}
                     checked={deleteTracking[currentpage * 9 - 9 + i]?.checked}
                   />
                 </div>
@@ -146,20 +141,24 @@ const ContactsBody = ({
                     {x.Industry}
                   </div>
                   <HoverOver Email={x.Email} Phonenumber={x.Phonenumber} />
-                  {/* <ReactTooltip  place='bottom' id='tool'/> */}
-                  {/* <div className="Email  common-header-styles remove-border glossy-background tip" 
-              onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} data-for='tool' data-tip={x.Email}
-              >{x.Email}</div> */}
-                  {/* <div className={isHovering?'blue Phonenumber  common-header-styles remove-border glossy-background':"Phonenumber  common-header-styles remove-border glossy-background"}>{x.Phonenumber}</div> */}
+                  
                   <div className="Country  common-header-styles remove-border glossy-background">
                     {x.Country}
                   </div>
                 </div>
                 <div className="action-wrapper">
-                  <div className="Action content-action">
-                    <GrEdit />
-                    <div onClick={(e) => deletebyicon(e)}>
+                  <div className="Action content-action delete-icon">
+                    <div className="edit-icon">
+                    <FontAwesomeIcon
+              style={{ color: "rgb(0,181,226)" }}
+                  icon={solid ("pencil")}
+                />
+                    </div>
+        
+                    <div className="delete-red-icon"  onClick={(e) => deletebyicon(e)}>
                       <VscTrash data-svgindex={currentpage * 9 - 9 + i} />
+                      
+                      
                     </div>
                   </div>
                 </div>
@@ -171,72 +170,54 @@ const ContactsBody = ({
         header?.heading &&
         searchedEmails?.datas?.map((x, i) => {
           return (
-            <div className="data-wrapper" key={i}>
+            <div className="data-wrapper  common-inside-text-color" key={i}>
               <div className="input-header">
                 <input
                   data-index={String(i)}
                   onChange={(e) => changeCheckbox(e)}
                   data-searchdelid={searchedEmails?.datas[0]?._id}
                   type={"checkbox"}
-                  // checked={deleteTracking[i]?.checked}
                 />
               </div>
 
-            
-              {/* 
-              let deleteid=searchedEmails?.datas[0]?._id
-    let idsArray = [deleteid];
-              
-              data-index={String(currentpage * 9 - 9 + i)}
-                    onChange={(e) => changeCheckbox(e)}
-                    id={x._id}
-                    type={"checkbox"}
-                    // style={{backgroundColor:"red"}}
-                    className={
-                      showImportUI || showDeleteUI ? "checkbox-background" : ""
-                    }
-                    // checked={deleteTracking[i]?.checked}
-                    checked={deleteTracking[currentpage * 9 - 9 + i]?.checked} */}
           
               <div className="content-overall-wrapper ">
-                <div className="Name common-header-styles remove-border">
+                <div className="Name common-header-styles glossy-background remove-border">
                   {x.Name}
                 </div>
-                <div className="Designation  common-header-styles remove-border">
+                <div className="Designation  common-header-styles glossy-background remove-border">
                   {x.Designation}
                 </div>
-                <div className="Company  common-header-styles remove-border">
+                <div className="Company  common-header-styles glossy-background remove-border">
                   {x.Company}
                 </div>
-                <div className="Industry  common-header-styles remove-border">
+                <div className="Industry  common-header-styles glossy-background remove-border">
                   {x.Industry}
                 </div>
-                <div className="Email  common-header-styles remove-border">
+                <div className="Email  common-header-styles glossy-background remove-border">
                   {x.Email}
                 </div>
-                <div className="Phonenumber  common-header-styles remove-border">
+                <div className="Phonenumber  common-header-styles  glossy-background remove-border">
                   {x.Phonenumber}
                 </div>
-                <div className="Country  common-header-styles remove-border">
+                <div className="Country  common-header-styles  glossy-background remove-border">
                   {x.Country}
                 </div>
               </div>
-              {/* <div className="action-wrapper-body"> */}
-              {/* <div  className="Action content-action"> */}
-              {/* <GrEdit/> */}
-              {/* <div  className="t" onClick={()=>deletebyicon()}> */}
-              {/* <VscTrash  /> */}
-              {/* </div> */}
-              {/* </div> */}
-              {/* </div> */}
+            
+
+
+             
               <div className="action-wrapper">
-                <div className="Action content-action">
-                  <GrEdit />
-                  <div onClick={(e) => deletebyiconbysearch(e)}>
+                <div className="Action content-action  delete-icon">
+                <FontAwesomeIcon
+              style={{ color: "rgb(0,181,226)" }}
+                  icon={solid ("pencil")}
+                />
+                  <div className="delete-red-icon"  onClick={(e) => deletebyiconbysearch(e)}>
                     <VscTrash />
                   </div>
 
-                  {/* <div onClick={(e)=>deletebyicon(e)}><VscTrash  data-svgindex={i}/></div> */}
                 </div>
               </div>
             </div>

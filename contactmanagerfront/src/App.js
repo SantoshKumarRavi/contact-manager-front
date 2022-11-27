@@ -10,7 +10,6 @@ import ImportUI from "./import/ImportUI";
 import { AuthProvider } from "../src/useauth/Useauth";
 import Signup from "./signup/Signup";
 import Login from "./login/Login";
-// import UnAuthorize from "./unauthorize/UnAuthorize"
 function App() {
   return (
     <Router>
@@ -21,7 +20,6 @@ function App() {
           path="/login"
           element={
             <AuthProvider>
-              {" "}
               <Login />
             </AuthProvider>
           }

@@ -14,8 +14,7 @@ const Searchbar = ({
   const [issearched, setSearched] = useState(false);
   const [showEmail, setShowEmail] = useState({});
   const searchHandler = (e) => {
-    // const [searctText, setSearchText]=useState("")
-    // {_id: '637e091f6a0c229c73f2103e', name: 'Shantosh', email: 'shantosh@gmail.com'}
+    
     let search = e.target.value;
     setSearchText(search);
     if (search === "") {
@@ -56,7 +55,6 @@ const Searchbar = ({
         setSearched(false);
       }
 
-      //  setSearchResult(newContactList)
     } else {
       setSearched(false);
     }
@@ -73,9 +71,8 @@ const Searchbar = ({
           className={
             showImportUI || showDeleteUI
               ? "input-search input-search-content glossy-background"
-              : "input-search input-search-content"
+              : "input-search input-search-content searchbarinput"
           }
-          // className='input-search input-search-content'
           placeholder="Search contacts"
           value={searctText}
           onChange={searchHandler}

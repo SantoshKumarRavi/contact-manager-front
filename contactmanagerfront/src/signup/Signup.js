@@ -57,10 +57,10 @@ const Signup = () => {
     <div className="main-div">
       <div className="popup" style={popStyle}>
         <IoMdCloudDone style={{ fontSize: "40px", color: "green" }} />
-        <h1
+        {/* <h1
           style={{ color: "#7D8CC4", bottom: "80px" }}
-        >{`Kindly Login ${form.name}`}</h1>
-        <p>{message}</p>
+        >{`Kindly Login ${form.name}`}</h1> */}
+        <p className="message">{message}</p>
         <button
           className="popup-btn"
           onClick={() => {
@@ -77,6 +77,7 @@ const Signup = () => {
         <input
           className="regisName"
           type="text"
+          autoComplete="off"
           placeholder="Name"
           onChange={(e) => setForm({ ...form, name: e.target.value })}
           name="name"
@@ -84,6 +85,7 @@ const Signup = () => {
         />
         <input
           className="upper-input input regisName"
+          autoComplete="off"
           onChange={(e) => setForm({ ...form, email: e.target.value })}
           name="email"
           type="email"
@@ -101,10 +103,10 @@ const Signup = () => {
           />
           <span className="icon-span">
             <AiFillEyeInvisible
-              style={hide}
-              onClick={() => handleview("hide")}
+              style={show}
+              onClick={() => handleview("show")}
             />
-            <AiFillEye style={show} onClick={() => handleview("show")} />
+            <AiFillEye style={hide} onClick={() => handleview("hide")} />
           </span>
         </div>
         <div className="password-div">
@@ -118,10 +120,10 @@ const Signup = () => {
           />
           <span className="icon-span">
             <AiFillEyeInvisible
-              style={hide}
-              onClick={() => handleview("hide")}
+              style={show}
+              onClick={() => handleview("show")}
             />
-            <AiFillEye style={show} onClick={() => handleview("show")} />
+            <AiFillEye style={hide} onClick={() => handleview("hide")} />
           </span>
         </div>
         <button className="button" type="Submit">

@@ -8,8 +8,10 @@ const ContactsBodyHead = ({
   header,
   changeCheckbox,
 }) => {
-  return (
-    <div className="data-wrapper body-header">
+  return (<>
+    <div className={(showImportUI || showDeleteUI)?`data-wrapper body-header common-opacity`:"data-wrapper body-header"}
+    style={{backgroundColor:filewithoutnpm?.datas?.length?"#B3DFFF":"#FFFFFF"}}
+    >
       {filewithoutnpm?.datas?.length !== 0 && header?.heading && (
         <div className="input-header">
           <input
@@ -22,7 +24,7 @@ const ContactsBodyHead = ({
           />
         </div>
       )}
-      <div className="content-overall-wrapper">
+      <div className="content-overall-wrapper common-header-text-color">
         {filewithoutnpm?.datas?.length !== 0 &&
           header?.heading?.map((ele, i) => {
             if (ele !== "Designation" && ele !=="Company" && ele !== "Industry") {
@@ -52,13 +54,13 @@ const ContactsBodyHead = ({
             }
           })}
       </div>
-      <div className="action-wrapper">
+      <div className="action-wrapper common-header-text-color">
         {filewithoutnpm?.datas?.length !== 0 && header?.heading && (
           <div className="Action">Action</div>
         )}
       </div>
     </div>
-  );
+  </>);
 };
 
 export default ContactsBodyHead;

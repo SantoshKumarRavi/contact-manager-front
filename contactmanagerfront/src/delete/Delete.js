@@ -1,11 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import "../App.css";
-import Button from "../components/Button";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   solid
-} from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
+} from "@fortawesome/fontawesome-svg-core/import.macro";
 function Appdelete({
   showDeleteUI,
   setshowDeleteUI,
@@ -17,13 +16,11 @@ function Appdelete({
   filewithoutnpm,
   searchedEmails,
   setSearchedEmails,
+  showDeleteref_btn
 }) {
-  const showDeleteref_btn = useRef(null);
   const showDeleteref_content = useRef(null);
   const [contactDeleted, setContactDeleted] = useState(false);
-  function updateshowDeleteUI() {
-    setshowDeleteUI((prev) => !prev);
-  }
+ 
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -42,9 +39,8 @@ function Appdelete({
     return () => {
       document.removeEventListener("click", handleClickOutside, false);
     };
-  }, [setshowDeleteUI,showDeleteUI]);
+  }, [setshowDeleteUI,showDeleteUI,showDeleteref_btn]);
   useEffect(() => {
-    // imp for claer
     if (contactDeleted) {
       setTimeout(() => {
         setshowDeleteUI(false);
@@ -58,13 +54,6 @@ function Appdelete({
     deleteTracking.forEach((ele) => {
       if (ele.checked) {
         idsArray.push(ele.id);
-        // let currentid=ele.id
-        // setIdObj((prev)=>{
-        //   return ({
-        //     ...prev,
-        //     currentid
-        //   })
-        // })
       }
     });
 
@@ -78,9 +67,6 @@ function Appdelete({
       })
         .then((x) => x.json())
         .then((removed) => {
-          // updatedAfterDelete.filter((e)=>{
-
-          // })
           let hashmap = new Map();
           deleteTracking.forEach((ele) => {
             if (ele.checked) {
@@ -96,7 +82,6 @@ function Appdelete({
             return value;
           });
 
-          // setshowDeleteUI(false)
           setfilewithoutnpm({ datas: updatedAfterDelete });
 
           let updatedDeletedtrackingIds = [...deleteTracking];
@@ -122,15 +107,8 @@ function Appdelete({
   return (
     <>
       {showDeleteUI && (
-        <style>{"body {background-color:rgba(0, 0, 0, 0.5)}"}</style>
+        <style>{"body {background-color:rgba(0, 0, 0, 0.5)"}</style>
       )}
-      <Button
-        classname={classname}
-        showUI={showDeleteUI}
-        showref={showDeleteref_btn}
-        functionality={updateshowDeleteUI}
-        value={"Delete"}
-      />
       <div className="import">
         {showDeleteUI && (
           <div ref={showDeleteref_content}>
