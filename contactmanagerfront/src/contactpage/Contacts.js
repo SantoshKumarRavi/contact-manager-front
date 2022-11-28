@@ -83,7 +83,7 @@ const Contacts = ({
   }, [filewithoutnpm,currentpage]);
   function changepages(e) {
     let pagenumber = e.target.id;
-    setCurrentpage(() => pagenumber);
+    setCurrentpage(() =>parseInt(pagenumber));
   }
   function updateshowDeleteUI() {
     setshowDeleteUI((prev) => !prev);

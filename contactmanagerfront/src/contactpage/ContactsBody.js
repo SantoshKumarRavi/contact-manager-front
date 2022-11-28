@@ -108,7 +108,7 @@ const ContactsBody = ({
           ?.slice(currentpage * 9 - 9, currentpage * 9)
           .map((x, i) => {
             return (
-              <div className={(i%2!==0)?"data-wrapper common-inside-text-color alternate-color":"data-wrapper common-inside-text-color"} key={i}>
+              <div className={(i%2!==0)?"data-wrapper hover-over-content common-inside-text-color alternate-color":"data-wrapper hover-over-content common-inside-text-color"} key={i}>
                 <div
                   className={
                     showImportUI || showDeleteUI
