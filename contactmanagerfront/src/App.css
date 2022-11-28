@@ -654,11 +654,26 @@ border-radius: 10px;
   height: 75%;
 }
 
+.main-data-wrapper{
+  background: white;
+  box-shadow:1px 1px 1px 1px white;
+  background-color: white;
+  border: white;
+  color: #B3DFFF;
+  color: #ffffff;
+}
+
 .data-wrapper{
   display: flex;
   flex-direction: row;
   width: 100%;
   height: 10%;
+  background: white;
+  box-shadow: white;
+  background-color: white;
+  border: white;
+  color: #B3DFFF;
+  color: #ffffff;
 }
 
 .content-overall-wrapper{
@@ -693,7 +708,7 @@ align-items: center;
 }
 .body-header{
 /* background: #B3DFFF; */
-box-shadow: inset -1px -1px 20px rgba(254, 134, 39, 0.1), inset 1px 1px 20px rgba(254, 134, 39, 0.1);
+/* box-shadow: inset -1px -1px 20px rgba(254, 134, 39, 0.1), inset 1px 1px 20px rgba(254, 134, 39, 0.1); */
 border-radius: 10px;
 height: 50px;
 }

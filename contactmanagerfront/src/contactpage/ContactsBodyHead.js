@@ -9,6 +9,7 @@ const ContactsBodyHead = ({
   changeCheckbox,
 }) => {
   return (<>
+  <div className="main-data-wrapper">
     <div className={(showImportUI || showDeleteUI)?`data-wrapper body-header common-opacity`:"data-wrapper body-header"}
     style={{backgroundColor:filewithoutnpm?.datas?.length?"#B3DFFF":"#FFFFFF"}}
     >
@@ -59,6 +60,7 @@ const ContactsBodyHead = ({
           <div className="Action">Action</div>
         )}
       </div>
+    </div>
     </div>
   </>);
 };
