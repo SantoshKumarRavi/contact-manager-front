@@ -21,7 +21,6 @@ const Login = () => {
   const [errcolor, seterrcolor] = useState("#7f8c8d");
 
   const value = AuthConsumer();
-  console.log("value", value);
   const router = useRouter();
 
   function handleview(action) {
