@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   solid
 } from "@fortawesome/fontawesome-svg-core/import.macro"; 
-
+import {getContacts,postContacts} from "../network/lib/authenticate"
 function ImportUI() {
   const navigate = useNavigate();
 
@@ -25,22 +25,14 @@ function ImportUI() {
   const value = AuthConsumer();
 
   useEffect(() => {
-
-    (async function getData() {
-      await fetch(`https://contactmanagerbackend.onrender.com/contacts/${value.userid}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-   
-      })
-        .then((x) => x.json())
+    if(value?.userid){
+      getContacts(value.userid)
         .then((fetcheddata) => {
           setfilewithoutnpm(() => {
-            return { datas: fetcheddata.data };
+            return { datas: fetcheddata?.data?.data };
           });
-          if (fetcheddata?.data?.length !== 0) {
-            fetcheddata.data.forEach((element) => {
+          if (fetcheddata?.data?.data?.length !== 0) {
+            fetcheddata?.data?.data?.forEach((element) => {
               setDeleteTracking((prev) => [
                 ...prev,
                 { id: element._id, checked: false },
@@ -61,8 +53,9 @@ function ImportUI() {
             });
           }
         });
-    })();
+    }
   }, [value.userid]);
+  
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -110,47 +103,33 @@ function ImportUI() {
       const csv = Papa.parse(target.result, { header: true });
       const parsedData = csv?.data;
       const columns = Object.keys(parsedData[0]);
-      console.log("parsed data",parsedData)
       if (parsedData) {
-        async function postData() {
-          await fetch("https://contactmanagerbackend.onrender.com/contacts", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ data: parsedData, userId: userId }),
-          })
-            .then((x) => x.json())
-            .then((saveddata) => {
-              console.log("returned saved ==> ", saveddata)
-
-              setheader(() => {
-                return { heading: columns };
+        postContacts({data: parsedData, userId: userId}).then((saveddata)=>{
+          setheader(() => {
+            return { heading: columns };
+          });
+          setfilewithoutnpm((prev) => {
+            if (prev.datas === undefined) {
+              saveddata.data?.data?.forEach((element) => {
+                setDeleteTracking((prev) => [
+                  ...prev,
+                  { id: element._id, checked: false },
+                ]);
               });
-              setfilewithoutnpm((prev) => {
-                if (prev.datas === undefined) {
-                  saveddata.data.forEach((element) => {
-                    setDeleteTracking((prev) => [
-                      ...prev,
-                      { id: element._id, checked: false },
-                    ]);
-                  });
-                  return { datas: saveddata.data };
-                } else {
-                  let updated = prev.datas;
-                  updated = [...updated, ...saveddata.data];
-                  saveddata.data.forEach((element) => {
-                    setDeleteTracking((prev) => [
-                      ...prev,
-                      { id: element._id, checked: false },
-                    ]);
-                  });
-                  return { datas: updated };
-                }
+              return { datas: saveddata?.data?.data };
+            } else {
+              let updated = prev.datas;
+              updated = [...updated, ...saveddata.data?.data];
+              saveddata?.data?.data.forEach((element) => {
+                setDeleteTracking((prev) => [
+                  ...prev,
+                  { id: element._id, checked: false },
+                ]);
               });
-            });
-        }
-        postData();
+              return { datas: updated };
+            }
+          });
+        })
       }
 
       if (parsedData) {
@@ -199,7 +178,6 @@ function ImportUI() {
         ...updatedDeletedTracking[indexToBeUpdated],
         checked: !updatedDeletedTracking[indexToBeUpdated].checked,
       };
-      console.log("updated de",updatedDeletedTracking)
       setDeleteTracking(() => updatedDeletedTracking);
     }
   }

@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import "./Signup.css";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { IoMdCloudDone } from "react-icons/io";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { register } from "../network/lib/authenticate";
 const Signup = () => {
   const navigate = useNavigate();
 
@@ -42,24 +41,17 @@ const Signup = () => {
 
       return;
     }
-
-    const config = {
-      headers: {
-        "content-type": "application/json",
-      },
-    };
-    axios.post("https://contactmanagerbackend.onrender.com/register", form, config).then((res) => {
+    register(form).then((x)=>{
       popup();
-      setMessage(res.data.message);
-    });
+      setMessage(x.data.message);
+    }).catch((err)=>{
+      console.log("err",err)
+    })
   }
   return (
     <div className="main-div">
       <div className="popup" style={popStyle}>
         <IoMdCloudDone style={{ fontSize: "40px", color: "green" }} />
-        {/* <h1
-          style={{ color: "#7D8CC4", bottom: "80px" }}
-        >{`Kindly Login ${form.name}`}</h1> */}
         <p className="message">{message}</p>
         <button
           className="popup-btn"

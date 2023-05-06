@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthConsumer } from "../useauth/Useauth";
-
+import {login} from "../network/lib/authenticate"
 const Login = () => {
   const navigate = useNavigate();
   const [type, setType] = useState("password");
@@ -35,24 +34,20 @@ const Login = () => {
     if (!data.password || !data.email) {
       return alert("Kindly fill all the fields");
     }
-    const config = {
-      headers: {
-        "content-type": "application/json",
-      },
-    };
-    axios.post("https://contactmanagerbackend.onrender.com/login", data, config).then((res) => {
+    login(data).then((res)=>{
       if (res.data.status !== "success") {
         seterrormsg(res.data.message);
         seterrcolor("red");
       }
-
       if (res.data.jwt_token !== undefined) {
         value.setValue(res.data.jwt_token);
         value.setName(data.email);
         value.setId(res.data.userid);
         navigate("/contact");
       }
-    });
+    }).catch((err)=>{
+      console.log("err",err)
+    })
   }
   return (
     <div className="main-div login-div">
