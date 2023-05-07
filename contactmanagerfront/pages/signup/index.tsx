@@ -5,7 +5,7 @@ import { IoMdCloudDone } from "react-icons/io";
 import { register } from "../src/network/lib/authenticate";
 import Link from 'next/link';
 
-const signup = () => {
+const Signup = () => {
   type FormType={
     password?:String,
     name?:String, 
@@ -22,7 +22,7 @@ const signup = () => {
   const [errcolor, seterrcolor] = useState("#7f8c8d");
 
   function popup() {
-    setPopStyle({ visiblility: "visible",display:"flex" });
+    setPopStyle({ visiblility:"visible",display:"flex" });
   }
   function handleview(action) {
     if (action === "show") {
@@ -61,7 +61,7 @@ const signup = () => {
         >
             <Link 
              href={`/login`}>
-            <a style={{textDecoration:"none"}}>
+            <a  style={{textDecoration:"none"}}>
             Log-In
             </a>
           </Link>
@@ -145,4 +145,4 @@ const signup = () => {
   );
 };
 
-export default signup;
+export default Signup;
